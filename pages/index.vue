@@ -1,5 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const data = await GqlPing();
+</script>
 
 <template>
-  <div>TEmplate</div>
+  <div>Template</div>
+  <div>{{ data.ping }}</div>
 </template>

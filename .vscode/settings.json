@@ -11,6 +11,12 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": ".prettierrc",
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "scss.lint.unknownAtRules": "ignore",
+  "eslint.format.enable": true,
+  "prettier.useEditorConfig": false,
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#3ef79a",
     "activityBar.background": "#3ef79a",

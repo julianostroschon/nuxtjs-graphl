@@ -1,20 +1,18 @@
-import type { FieldResolver } from "nexus";
+import type { FieldResolver } from 'nexus'
 
-import { PageArgs } from "../../utils/pageArgs";
-
-export const getUsers: FieldResolver<"Query", "getUsers"> = async (
+export const getUsers: FieldResolver<'Query', 'getUsers'> = async (
   _,
   args,
-  { prisma }
+  { prisma },
 ) => {
-  const { id, username, email } = args.userArgs || {};
-  const { skip = 0, take = 10 } = args.pageArgs || {};
+  const { id, username, email } = args.userArgs || {}
+  const { skip = 0, take = 10 } = args.pageArgs || {}
 
   const where = {
     ...(id && { id }),
     ...(username && { username: { contains: username } }),
     ...(email && { email: { contains: email } }),
-  };
+  }
 
   const users = await prisma.user.findMany({
     where,
@@ -26,23 +24,23 @@ export const getUsers: FieldResolver<"Query", "getUsers"> = async (
       email: true,
       created_at: true,
     },
-  });
+  })
 
-  const totalCount = await prisma.user.count({ where });
+  // const totalCount = await prisma.user.count({ where });
 
   return {
     nodes: users.map(
       (user: {
-        id: number;
-        username: string;
-        email: string;
-        created_at: Date;
+        id: number
+        username: string
+        email: string
+        created_at: Date
       }) => ({
         id: user.id,
         username: user.username,
         email: user.email,
         createdAt: user.created_at,
-      })
+      }),
     ),
-  };
-};
+  }
+}

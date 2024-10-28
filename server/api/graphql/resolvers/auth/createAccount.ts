@@ -8,7 +8,7 @@ import { getTransport } from "../../../mail/transport";
 import { generateVerificationEmail } from "../../../mail/verifyAccount";
 import { registrationValidation } from "../../../utils/registrationValidation";
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+ 
 import { nanoid } from "nanoid";
 
 export const createAccount: FieldResolver<"Mutation", "createAccount"> = async (

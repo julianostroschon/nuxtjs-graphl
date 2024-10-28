@@ -38,5 +38,5 @@ export default defineNuxtConfig({
       avoidOptionals: true,
     },
   },
-  plugins: ['~/plugins/i18n.ts'],
+  plugins: ['~/plugins/i18n.ts', '~/plugins/pinia.ts'],
 })

@@ -11,4 +11,6 @@ const data = await GqlPing()
   <div class="p-4">
     <Button class="rounded-lg">Click me</Button>
   </div>
+  <p>Count: {{ $counterStore.count }}</p>
+  <Button @click="$counterStore.increment">Increment</Button>
 </template>

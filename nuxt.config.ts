@@ -9,10 +9,11 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      apiBase: '/api/grapqhl',
       "graphql-client": {
         clients: {
           default: {
-            host: "http://localhost:3000/api/graphql",
+            host: process.env.NUXT_PUBLIC_GRAPHQL_HOST || "http://localhost:3000/api/graphql",
             schema: "./generated/schema.graphql",
           },
         },

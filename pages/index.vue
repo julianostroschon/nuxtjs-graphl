@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// useGqlCors({ credentials: 'same-origin' })
+
 const data = await GqlPing();
 </script>
 

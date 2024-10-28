@@ -1,4 +1,5 @@
 {
+  "i18n-ally.localesPaths": ["locales"],
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.*.json, env.d.ts",
@@ -9,5 +10,26 @@
     "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#3ef79a",
+    "activityBar.background": "#3ef79a",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#af66f9",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#3ef79a",
+    "statusBar.background": "#0df580",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#08c767",
+    "statusBarItem.remoteBackground": "#0df580",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#0df580",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#0df58099",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#0df580",
+  "i18n-ally.keystyle": "nested"
 }

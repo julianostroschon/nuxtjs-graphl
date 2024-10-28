@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // useGqlCors({ credentials: 'same-origin' })
+import { Button } from '@/components/ui/button'
 
 const data = await GqlPing()
 </script>
@@ -7,7 +8,7 @@ const data = await GqlPing()
 <template>
   <div>Template</div>
   <div>{{ data.ping }}</div>
-  <div>
-    <!-- <Button>Click me</Button> -->
+  <div class="p-4">
+    <Button class="rounded-lg">Click me</Button>
   </div>
 </template>

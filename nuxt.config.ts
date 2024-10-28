@@ -6,7 +6,13 @@ export default defineNuxtConfig({
     'nuxt-graphql-server',
     'nuxt-graphql-client',
     '@nuxtjs/eslint-module',
+    '@nuxtjs/tailwindcss',
+    'shadcn-nuxt',
   ],
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui',
+  },
   graphqlServer: {
     schema: 'generated/schema.graphql',
     url: '/api/graphql',

@@ -2,13 +2,20 @@
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
+  },
   modules: [
     'nuxt-graphql-server',
     'nuxt-graphql-client',
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
+    '@nuxtjs/i18n',
   ],
   shadcn: {
     prefix: '',
@@ -38,5 +45,22 @@ export default defineNuxtConfig({
       avoidOptionals: true,
     },
   },
-  plugins: ['~/plugins/i18n.ts', '~/plugins/pinia.ts'],
+  i18n: {
+    locales: [
+      {
+        code: 'pt-BR',
+        file: 'pt.json', // Alterado para .yml
+        name: 'Português',
+      },
+      {
+        code: 'en',
+        file: 'en.json', // Alterado para .yml
+        name: 'English',
+      },
+    ],
+    defaultLocale: 'pt-BR',
+    strategy: 'prefix_except_default',
+    langDir: 'locales/',
+  },
+  plugins: ['~/plugins/pinia.ts'],
 })

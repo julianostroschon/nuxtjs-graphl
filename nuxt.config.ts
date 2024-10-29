@@ -75,4 +75,7 @@ export default defineNuxtConfig({
     lazy: true,
   },
   plugins: ['~/plugins/pinia.ts'],
+  experimental: {
+    asyncContext: true,
+  },
 })

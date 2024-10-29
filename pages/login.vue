@@ -19,8 +19,14 @@ const { handleSubmit } = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit(values => {
-  console.log('Form submitted!', values)
+const onSubmit = handleSubmit(async values => {
+  const data = await GqlLogin({
+    credentials: {
+      password: values.password,
+      username: values.username,
+    },
+  })
+  console.log('Form submitted!', data)
 })
 
 // const isLoading = ref(false)

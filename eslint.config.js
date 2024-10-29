@@ -20,6 +20,7 @@ export default [
       '**/generated/**',
       '**/.output/**',
       '**/.nuxt/**',
+      '**/components/ui/**',
     ],
   },
 

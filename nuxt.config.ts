@@ -12,11 +12,13 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-graphql-server',
     'nuxt-graphql-client',
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
     '@nuxtjs/i18n',
+    '@nuxt/icon',
   ],
+  css: ['~/assets/css/main.css'],
   shadcn: {
     prefix: '',
     componentDir: './components/ui',
@@ -24,6 +26,15 @@ export default defineNuxtConfig({
   graphqlServer: {
     schema: 'generated/schema.graphql',
     url: '/api/graphql',
+  },
+  imports: {
+    dirs: ['composables/**'],
+
+    imports: [
+      { from: '@vee-validate/zod', name: 'toTypedSchema' },
+      { from: 'vee-validate', name: 'useForm' },
+      { from: 'zod', as: 'z', name: '*' },
+    ],
   },
   runtimeConfig: {
     public: {
@@ -49,7 +60,7 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'pt-BR',
-        file: 'pt.json', // Alterado para .yml
+        file: 'pt-BR.json', // Alterado para .yml
         name: 'Português',
       },
       {
@@ -61,6 +72,7 @@ export default defineNuxtConfig({
     defaultLocale: 'pt-BR',
     strategy: 'prefix_except_default',
     langDir: 'locales/',
+    lazy: true,
   },
   plugins: ['~/plugins/pinia.ts'],
 })

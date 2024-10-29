@@ -1,0 +1,40 @@
+{
+  "auth": {
+    "description": "Informar suas credenciais para acessar",
+    "error": "Falha na autenticação",
+    "footer": "Ao entrar em nossa plataforma você concorda com nossos Termos de Uso e Política de Privacidade.",
+    "header": "Acesse nosso sistema",
+    "invalidCredentials": "Credenciais inválidas, tente novamente",
+    "logging_in": "Acessando",
+    "logout": "Sair",
+    "password": "Senha",
+    "submit": "Acessar",
+    "username": "Usuário ou senha"
+  },
+  "button": {
+    "access": "Acessar",
+    "cancel": "Cancelar",
+    "create": "Criar",
+    "delete": "Deletar",
+    "edit": "Editar",
+    "save": "Salvar",
+    "submit": "Enviar"
+  },
+  "common": {
+    "required": "Campo obrigatório"
+  },
+  "dashboard": {
+    "home": "Seja bem vindo"
+  },
+  "error": {
+    "auth": "Erro desconhecido na validação dos dados, tente novamnete",
+    "network": "Erro de rede desconhecido, tente novamente",
+    "not-found": "Não encontrado",
+    "unknown": "Erro desconhecido, tente novamnete"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "projects": "Projetos",
+    "tasks": "Tarefas"
+  }
+}

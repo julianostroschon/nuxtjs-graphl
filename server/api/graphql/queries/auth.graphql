@@ -1,0 +1,10 @@
+mutation Login($credentials: loginCredentials!) {
+  login(credentials: $credentials) {
+    token
+    username
+  }
+}
+
+# query ValidateToken {
+#   validateToken
+# }

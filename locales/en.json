@@ -1,5 +1,40 @@
 {
   "auth": {
-    "login": "Login"
+    "description": "Enter your credentials to access",
+    "error": "Authentication failed",
+    "footer": "By logging into our platform you agree to our Terms of Use and Privacy Policy.",
+    "header": "Access our system",
+    "invalidCredentials": "Invalid credentials, please try again",
+    "logging_in": "Logging in",
+    "logout": "Logout",
+    "password": "Password",
+    "submit": "Login",
+    "username": "Username or password"
+  },
+  "button": {
+    "access": "Access",
+    "cancel": "Cancelar",
+    "create": "Criar",
+    "delete": "Deletar",
+    "edit": "Editar",
+    "save": "Salvar",
+    "submit": "Enviar"
+  },
+  "common": {
+    "required": "Campo obrigatório"
+  },
+  "dashboard": {
+    "home": "Welcome"
+  },
+  "error": {
+    "auth": "Unknown data validation error, please try again",
+    "network": "Unknown network error, please try again",
+    "not-found": "Not found",
+    "unknown": "Unknown error, please try again"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "tasks": "Tasks"
   }
 }

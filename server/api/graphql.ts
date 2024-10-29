@@ -4,6 +4,7 @@ import { startServerAndCreateH3Handler } from '@as-integrations/h3'
 import { makeSchema } from 'nexus'
 import { join } from 'path'
 import * as types from './graphql/types'
+import logger from './utils/logger'
 import { prisma } from './utils/prisma'
 
 // Defina o tipo de contexto
@@ -27,6 +28,7 @@ export default startServerAndCreateH3Handler(apollo, {
     return {
       prisma,
       event,
+      logger,
     }
   },
 })

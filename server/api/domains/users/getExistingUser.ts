@@ -1,10 +1,14 @@
-import type { PrismaClient } from "@prisma/client";
-import { compare } from "bcrypt";
+import type { PrismaClient } from '@prisma/client'
+import { compare } from 'bcrypt'
+import { GraphQLError } from 'graphql'
+import type { Logger } from 'pino'
 
 export const getExistingUser = async (
   prisma: PrismaClient,
-  credentials: { username: string; password: string }
+  logger: Logger,
+  credentials: { username: string; password: string },
 ) => {
+  const loggi = logger.child({ method: 'getExistingUser' })
   const existingUser = await prisma.user.findFirst({
     where: {
       OR: [{ username: credentials.username }, { email: credentials.username }],
@@ -15,19 +19,20 @@ export const getExistingUser = async (
       passhash: true,
       id: true,
     },
-  });
+  })
 
   const passwordsMatch =
     (await compare(credentials.password, existingUser?.passhash as string)) ||
-    "";
+    ''
 
   if (!existingUser || !passwordsMatch) {
-    throw new Error("Invalid credentials");
+    loggi.error('Invalid credentials')
+    throw new GraphQLError('Invalid credentials')
   }
 
   return {
     username: existingUser.username,
     email: existingUser.email,
     id: existingUser.id,
-  };
-};
+  }
+}

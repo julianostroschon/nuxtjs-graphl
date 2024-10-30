@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useLogout } from './logout'
 import { links } from './menu.Links'
+
+const { t } = useI18n()
 const props = defineProps<{
   isSidebarCollapsed: boolean
 }>()
@@ -48,8 +50,8 @@ watch(
         @click="handleLogout"
         class="flex items-center gap-3 bg-background mx-2 mt-auto px-4 py-2 border-t rounded-lg text-muted-foreground hover:text-primary transition-colors duration-300 cursor-pointer ease-in-out"
       >
-        <iconify-icon icon="lucide:log-out"></iconify-icon>
-        <span v-if="!isCollapsed">{{ $t('auth.logout') }}</span>
+        <Icon name="lucide:log-out"></Icon>
+        <span v-if="!isCollapsed">{{ t('auth.logout') }}</span>
       </div>
     </nav>
   </aside>

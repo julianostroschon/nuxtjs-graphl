@@ -1,25 +1,25 @@
 <template>
   <button @click="toggleLanguage">
-    <iconify-icon
-      :icon="
-        currentLanguage === 'en'
+    <Icon
+      :name="
+        currentLocale === 'en'
           ? 'twemoji:flag-for-flag-united-states'
           : 'twemoji:flag-for-flag-brazil'
       "
-      class="w-10 h-10"
+      class="w-8 h-8"
     />
   </button>
 </template>
 
 <script setup lang="ts">
-import { loadLanguageAsync } from '@/modules/i18n'
-import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
 
-const { locale } = useI18n()
-const currentLanguage = ref(locale.value)
+const { locale, setLocale } = useI18n()
+const currentLocale = computed(() => locale.value)
 
 async function toggleLanguage() {
-  currentLanguage.value = currentLanguage.value === 'en' ? 'pt-BR' : 'en'
-  await loadLanguageAsync(currentLanguage.value)
+  const newLocale = currentLocale.value === 'en' ? 'pt-BR' : 'en'
+  await setLocale(newLocale)
 }
 </script>

@@ -9,6 +9,7 @@ const props = defineProps<{
   links: LinkProp[]
   isCollapsed: boolean
 }>()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -18,12 +19,12 @@ const props = defineProps<{
     :to="link.to"
     class="flex items-center gap-3 mx-2 px-4 py-2 rounded-lg text-muted-foreground hover:text-primary transition-colors duration-300 ease-in-out"
   >
-    <iconify-icon :icon="link.icon"></iconify-icon>
+    <Icon :name="link.icon"></Icon>
     <span
       class="text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ease-in-out"
       :class="props.isCollapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'"
     >
-      {{ $t(link.text) }}
+      {{ t(link.text) }}
     </span>
   </RouterLink>
 </template>

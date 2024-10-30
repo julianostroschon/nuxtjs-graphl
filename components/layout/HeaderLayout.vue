@@ -6,7 +6,7 @@ const props = defineProps<{
   isSidebarCollapsed: boolean
 }>()
 const { handleLogout } = useLogout()
-
+const { t } = useI18n()
 function handleToggleSidebar() {
   emits('toggleSidebar')
 }
@@ -23,7 +23,7 @@ function handleToggleSidebar() {
       class="md:block hidden w-8 h-8 transition-transform duration-300 ease-in-out"
       :class="{ 'rotate-180': props.isSidebarCollapsed }"
     >
-      <iconify-icon icon="lucide:menu"></iconify-icon>
+      <Icon name="lucide:menu"></Icon>
     </button>
     <div class="md:hidden">
       <DropdownMenu>
@@ -40,8 +40,8 @@ function handleToggleSidebar() {
           <div v-for="link in links" :key="link.to">
             <DropdownMenuItem>
               <RouterLink :to="link.to" class="flex items-center gap-2">
-                <iconify-icon :icon="link.icon"></iconify-icon>
-                <span>{{ $t(link.text) }}</span>
+                <Icon :name="link.icon"></Icon>
+                <span>{{ t(link.text) }}</span>
               </RouterLink>
             </DropdownMenuItem>
           </div>
@@ -49,15 +49,15 @@ function handleToggleSidebar() {
           <!-- <div v-for="link in linksFooter" :key="link.to">
             <DropdownMenuItem>
               <RouterLink :to="link.to" class="flex items-center gap-2">
-                <iconify-icon :icon="link.icon"></iconify-icon>
+                <Icon :name="link.icon"></Icon>
                 <span>{{ link.text }}</span>
               </RouterLink>
             </DropdownMenuItem>
           </div> -->
           <DropdownMenuItem>
             <button @click="handleLogout" class="flex items-center gap-2">
-              <iconify-icon icon="lucide:log-out"></iconify-icon>
-              <span>{{ $t('auth.logout') }}</span>
+              <Icon name="lucide:log-out"></Icon>
+              <span>{{ t('auth.logout') }}</span>
             </button>
           </DropdownMenuItem>
         </DropdownMenuContent>

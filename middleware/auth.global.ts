@@ -21,10 +21,24 @@ export default defineNuxtRouteMiddleware(to => {
   // Persist authStore state from cookies
   if (token && !authStore.token) {
     authStore.setToken(token)
-    try {
-      authStore.setUser(user ? JSON.parse(user) : {})
-    } catch (e) {
-      console.error('Failed to parse authUser cookie:', e)
+
+    if (user) {
+      try {
+        // Tenta fazer o parse do user como JSON
+        const parsedUser = typeof user === 'string' ? JSON.parse(user) : user
+        authStore.setUser(parsedUser)
+      } catch (e) {
+        console.error('Failed to parse authUser cookie:', e)
+        // Se falhar, tenta usar o valor do cookie diretamente
+        if (typeof user === 'object' && user !== null) {
+          authStore.setUser(user)
+        } else {
+          console.warn('Invalid user data in cookie, setting default user')
+          authStore.setUser({ username: '' })
+        }
+      }
+    } else {
+      console.warn('No user data found in cookie, setting default user')
       authStore.setUser({ username: '' })
     }
   }

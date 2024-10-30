@@ -1,34 +1,43 @@
 import { ApolloServer } from '@apollo/server'
-import { startServerAndCreateH3Handler } from '@as-integrations/h3'
+import {
+  H3ContextFunctionArgument,
+  startServerAndCreateH3Handler,
+} from '@as-integrations/h3'
 
-import { makeSchema } from 'nexus'
-import { join } from 'path'
-import * as types from './graphql/types'
 import logger from './utils/logger'
 import { prisma } from './utils/prisma'
 
-// Defina o tipo de contexto
-// type Context = {
-//   prisma: PrismaClient
-//   event: H3Event
-// }
+import type { JwtPayload } from 'jsonwebtoken'
+import { schema } from './graphql/schema'
+import { verifyToken } from './utils/jwt'
 
-const schema = makeSchema({
-  types,
-  outputs: {
-    schema: join(process.cwd(), 'generated/schema.graphql'),
-    typegen: join(process.cwd(), 'generated/nexus-typegen.ts'),
-  },
-})
-
-const apollo = new ApolloServer({ schema: schema })
+const apollo = new ApolloServer({ schema })
 
 export default startServerAndCreateH3Handler(apollo, {
-  context: async event => {
+  context: async ({ event }: H3ContextFunctionArgument) => {
+    let decodeToken: JwtPayload | undefined
+    let username: string | undefined = undefined
+
+    const datasource: string | undefined = getHeader(event, 'datasource')
+
+    const token = getCookie(event, 'sid')
+    if (token !== undefined) {
+      decodeToken = await verifyToken(token as string)
+    }
+    if (decodeToken !== undefined) {
+      username = decodeToken.email
+    }
+    const loggi = logger.child({ username: username })
+
+    // const authorizationHeader = headers['authorization'] || ''
+    // console.log('Authorization Header:', authorizationHeader)
+
     return {
       prisma,
       event,
-      logger,
+      logger: loggi,
+      username,
+      datasource,
     }
   },
 })

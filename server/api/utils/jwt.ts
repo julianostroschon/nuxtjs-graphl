@@ -5,12 +5,12 @@ if (!process.env.JWT_SECRET) {
 }
 
 export const createToken = (
-  paylod: string | Buffer | object,
-  options: jwt.SignOptions
+  payload: string | Buffer | object,
+  options: jwt.SignOptions,
 ) => {
   return new Promise<string>((resolve, reject) => {
     jwt.sign(
-      paylod,
+      payload,
       process.env.JWT_SECRET as string,
       options,
       (err, encoded) => {
@@ -18,7 +18,7 @@ export const createToken = (
           return reject(err)
         }
         return resolve(encoded as string)
-      }
+      },
     )
   })
 }

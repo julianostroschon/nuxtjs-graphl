@@ -5,5 +5,7 @@ import { Logger } from 'pino'
 export interface GraphQLContext {
   prisma: PrismaClient
   logger: Logger
-  event: H3Event // Ajuste o tipo conforme necessário
+  event: H3Event
+  username: string | undefined
+  datasource: string | undefined // Ajuste o tipo conforme necessário
 }

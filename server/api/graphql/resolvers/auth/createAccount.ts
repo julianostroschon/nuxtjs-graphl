@@ -1,60 +1,61 @@
-import type { PrismaClient } from "@prisma/client";
-import { hash } from "bcrypt";
-import type { FieldResolver } from "nexus";
-import nodemailer from "nodemailer";
+import type { PrismaClient } from '@prisma/client'
+import { hash } from 'bcrypt'
+import type { FieldResolver } from 'nexus'
+import nodemailer from 'nodemailer'
 
-import { getRedisClient } from "../../../utils/redis";
-import { getTransport } from "../../../mail/transport";
-import { generateVerificationEmail } from "../../../mail/verifyAccount";
-import { registrationValidation } from "../../../utils/registrationValidation";
+import { getTransport } from '../../../mail/transport'
+import { generateVerificationEmail } from '../../../mail/verifyAccount'
+import { getRedisClient } from '../../../utils/redis'
+import { registrationValidation } from '../../../utils/registrationValidation'
 
- 
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid'
 
-export const createAccount: FieldResolver<"Mutation", "createAccount"> = async (
+export const createAccount: FieldResolver<'Mutation', 'createAccount'> = async (
   _,
   { credentials },
-  { prisma }
+  { prisma, logger, username },
 ) => {
-  await registrationValidation.validate(credentials);
-  await verifyExistUser(prisma, credentials);
+  const loggi = logger.child({ graphql: 'mutation.createAccount' })
+  loggi.info(`Creating account ${username}`)
 
-  const hashedPass = await hash(credentials.password, 9);
-  const key = nanoid();
+  await registrationValidation.validate(credentials)
+  await verifyExistUser(prisma, credentials)
+  const hashedPass = await hash(credentials.password, 9)
+  const key = nanoid()
 
   const userObjt = {
     username: credentials.username,
     email: credentials.email,
     hashedPass,
-  };
+  }
 
   await getRedisClient()
     .multi()
     .hmset(key, userObjt)
     .expire(key, 60 * 60 * 24)
-    .exec();
+    .exec()
 
   const mailOptions = {
     username: credentials.username,
     email: credentials.email,
     uuid: key,
-  };
+  }
 
-  const transport = await getTransport();
-  transport.sendMail(generateVerificationEmail(mailOptions)).then((info) => {
-    console.log(`Message id: ${info.messageId}`);
-    console.log(`URL: ${nodemailer.getTestMessageUrl(info)}`);
-  });
+  const transport = await getTransport()
+  transport.sendMail(generateVerificationEmail(mailOptions)).then(info => {
+    console.log(`Message id: ${info.messageId}`)
+    console.log(`URL: ${nodemailer.getTestMessageUrl(info)}`)
+  })
 
   return {
     message:
-      "Thanks for registering! Check your email for instructions on how to verify your account.",
-  };
-};
+      'Thanks for registering! Check your email for instructions on how to verify your account.',
+  }
+}
 
 const verifyExistUser = async (
   prisma: PrismaClient,
-  credentials: { email: string; username: string }
+  credentials: { email: string; username: string },
 ) => {
   const existingUser = await prisma.user.findFirst({
     where: {
@@ -65,8 +66,8 @@ const verifyExistUser = async (
         },
       ],
     },
-  });
+  })
   if (existingUser !== null) {
-    throw new Error("User or username already exists");
+    throw new Error('User or username already exists')
   }
-};
+}

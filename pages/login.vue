@@ -54,13 +54,12 @@ const onSubmit = handleSubmit(async values => {
         </CardDescription>
       </CardHeader>
       <CardContent class="flex flex-col gap-8">
-        <Alert v-if="errorMessage" variant="destructive">
-          <AlertTitle>Erro em sua tentativa de acesso!</AlertTitle>
-          <AlertDescription>
-            {{ errorMessage }}
-          </AlertDescription>
-        </Alert>
-
+        <MsgAlert
+          v-if="errorMessage"
+          :title="t('auth.error')"
+          :message="errorMessage"
+          type="destructive"
+        />
         <form class="flex flex-col gap-4" @submit="onSubmit">
           <FormField v-slot="{ field }" name="username">
             <FormItem>

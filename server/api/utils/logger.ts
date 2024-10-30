@@ -2,7 +2,7 @@ import pino from 'pino'
 
 const logger = pino({
   transport: {
-    target: process.env.NODE_ENV === 'production' ? 'pino-pretty' : 'pino/file',
+    target: process.env.NODE_ENV !== 'production' ? 'pino-pretty' : 'pino/file',
     options: {
       colorize: process.env.NODE_ENV !== 'production',
       translateTime: 'SYS:yyyy-mm-dd HH:MM:ss',

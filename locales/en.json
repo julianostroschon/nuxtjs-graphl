@@ -21,7 +21,8 @@
     "submit": "Enviar"
   },
   "common": {
-    "required": "Campo obrigatório"
+    "required": "Campo obrigatório",
+    "unknown": "Erro desconhecido"
   },
   "dashboard": {
     "home": "Welcome"

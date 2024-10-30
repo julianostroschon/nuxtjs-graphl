@@ -7,6 +7,7 @@ definePageMeta({
   layout: 'login',
 })
 const { t } = useI18n()
+const errorMessage = ref('')
 
 const formSchema = toTypedSchema(
   z.object({
@@ -20,13 +21,21 @@ const { handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit(async values => {
-  const data = await GqlLogin({
-    credentials: {
-      password: values.password,
-      username: values.username,
-    },
-  })
-  console.log('Form submitted!', data)
+  try {
+    const { login } = await GqlLogin({
+      credentials: {
+        password: values.password,
+        username: values.username,
+      },
+    })
+    console.log('Form submitted!', login)
+  } catch (error) {
+    if (error instanceof Error) {
+      errorMessage.value = error.message || t('common.unknown')
+    } else {
+      errorMessage.value = t('common.unknown')
+    }
+  }
 })
 
 // const isLoading = ref(false)

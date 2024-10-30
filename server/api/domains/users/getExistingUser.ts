@@ -29,8 +29,7 @@ export const getExistingUser = async (
     loggi.error('Invalid credentials')
     throw new GraphQLError('Mensagem de erro personalizada', {
       extensions: {
-        code: 'ERROR_CODE',
-        originalError: 'Mensagem de erro personalizada',
+        code: 'BAD_USER_INPUT',
       },
     })
   }

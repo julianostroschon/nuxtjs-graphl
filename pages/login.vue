@@ -8,6 +8,8 @@ definePageMeta({
 })
 const { t } = useI18n()
 const errorMessage = ref('')
+const router = useRouter()
+const isLoading = ref(false)
 
 const formSchema = toTypedSchema(
   z.object({
@@ -19,27 +21,24 @@ const formSchema = toTypedSchema(
 const { handleSubmit } = useForm({
   validationSchema: formSchema,
 })
+const authStore = useAuthStore()
 
 const onSubmit = handleSubmit(async values => {
+  errorMessage.value = ''
+  isLoading.value = true
   try {
-    const { login } = await GqlLogin({
-      credentials: {
-        password: values.password,
-        username: values.username,
-      },
-    })
-    console.log('Form submitted!', login)
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    const data = await GqlLogin({ credentials: values })
+    const { login } = data
+    authStore.setUser({ username: login?.username || '' })
+    authStore.setToken(login?.token || '')
   } catch (error) {
-    if (error instanceof Error) {
-      errorMessage.value = error.message || t('common.unknown')
-    } else {
-      errorMessage.value = t('common.unknown')
-    }
+    handleGraphQLError(error, errorMessage, t)
+  } finally {
+    router.push('/')
+    isLoading.value = false
   }
 })
-
-// const isLoading = ref(false)
-// const errorMessage = ref('')
 </script>
 
 <template>
@@ -54,6 +53,13 @@ const onSubmit = handleSubmit(async values => {
         </CardDescription>
       </CardHeader>
       <CardContent class="flex flex-col gap-8">
+        <Alert v-if="errorMessage" variant="destructive">
+          <AlertTitle>Erro em sua tentativa de acesso!</AlertTitle>
+          <AlertDescription>
+            {{ errorMessage }}
+          </AlertDescription>
+        </Alert>
+
         <form class="flex flex-col gap-4" @submit="onSubmit">
           <FormField v-slot="{ field }" name="username">
             <FormItem>
@@ -73,7 +79,25 @@ const onSubmit = handleSubmit(async values => {
               <FormMessage />
             </FormItem>
           </FormField>
-          <Button type="submit"> {{ t('button.access') }} </Button>
+          <Button
+            type="submit"
+            :loading="isLoading"
+            :class="[
+              'transition-colors',
+              isLoading
+                ? 'bg-gray-300 hover:bg-gray-300 text-gray-600'
+                : 'bg-primary hover:bg-primary/90',
+            ]"
+          >
+            <Icon
+              v-if="isLoading"
+              name="lucide:loader-circle"
+              class="mr-2 w-6 h-6 text-slate-800 animate-spin"
+            />
+            <span>{{
+              isLoading ? $t('auth.logging_in') : $t('auth.submit')
+            }}</span>
+          </Button>
         </form>
       </CardContent>
       <CardFooter class="flex flex-col gap-4">

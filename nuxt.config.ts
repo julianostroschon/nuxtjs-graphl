@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@nuxtjs/i18n',
     '@nuxt/icon',
+    '@pinia/nuxt',
   ],
   css: ['~/assets/css/main.css'],
   shadcn: {
@@ -74,7 +75,9 @@ export default defineNuxtConfig({
     langDir: 'locales/',
     lazy: true,
   },
-  plugins: ['~/plugins/pinia.ts'],
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
   experimental: {
     asyncContext: true,
   },

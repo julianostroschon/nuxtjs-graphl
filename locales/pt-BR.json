@@ -9,7 +9,11 @@
     "logout": "Sair",
     "password": "Senha",
     "submit": "Acessar",
-    "username": "Usuário ou senha"
+    "username": "Usuário ou senha",
+    "invalid": {
+      "user": "Credenciais inválidas, tente novamente",
+      "pass": "Credenciais inválidas, tente novamente!!"
+    }
   },
   "button": {
     "access": "Acessar",

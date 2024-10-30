@@ -20,18 +20,17 @@ export const getExistingUser = async (
       id: true,
     },
   })
-
+  if (!existingUser) {
+    loggi.error('Invalid credentials')
+    throw new GraphQLError('auth.invalid.user')
+  }
   const passwordsMatch =
     (await compare(credentials.password, existingUser?.passhash as string)) ||
     ''
 
-  if (!existingUser || !passwordsMatch) {
-    loggi.error('Invalid credentials')
-    throw new GraphQLError('Mensagem de erro personalizada', {
-      extensions: {
-        code: 'BAD_USER_INPUT',
-      },
-    })
+  if (!passwordsMatch) {
+    loggi.error('Invalid credentials!!')
+    throw new GraphQLError('auth.invalid.pass')
   }
 
   return {

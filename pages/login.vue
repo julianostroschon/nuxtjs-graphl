@@ -2,6 +2,7 @@
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
+// import ButtonLoader from '@/components/common/ButtonLoader.vue'
 
 definePageMeta({
   layout: 'login',
@@ -32,10 +33,10 @@ const onSubmit = handleSubmit(async values => {
     const { login } = data
     authStore.setUser({ username: login?.username || '' })
     authStore.setToken(login?.token || '')
+    router.push('/')
   } catch (error) {
     handleGraphQLError(error, errorMessage, t)
   } finally {
-    router.push('/')
     isLoading.value = false
   }
 })
@@ -79,25 +80,12 @@ const onSubmit = handleSubmit(async values => {
               <FormMessage />
             </FormItem>
           </FormField>
-          <Button
+          <ButtonLoader
             type="submit"
             :loading="isLoading"
-            :class="[
-              'transition-colors',
-              isLoading
-                ? 'bg-gray-300 hover:bg-gray-300 text-gray-600'
-                : 'bg-primary hover:bg-primary/90',
-            ]"
-          >
-            <Icon
-              v-if="isLoading"
-              name="lucide:loader-circle"
-              class="mr-2 w-6 h-6 text-slate-800 animate-spin"
-            />
-            <span>{{
-              isLoading ? $t('auth.logging_in') : $t('auth.submit')
-            }}</span>
-          </Button>
+            :loadingText="t('auth.logging_in')"
+            :text="t('auth.submit')"
+          />
         </form>
       </CardContent>
       <CardFooter class="flex flex-col gap-4">

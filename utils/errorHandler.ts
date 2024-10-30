@@ -15,7 +15,7 @@ export function handleGraphQLError(
 ) {
   if (isGraphQLErrorResponse(error)) {
     if (error.gqlErrors && error.gqlErrors.length > 0) {
-      errorMessage.value = error.gqlErrors[0].message || t('common.unknown')
+      errorMessage.value = t(error.gqlErrors[0].message) || t('common.unknown')
     } else {
       errorMessage.value = t('common.unknown')
     }

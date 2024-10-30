@@ -9,7 +9,11 @@
     "logout": "Logout",
     "password": "Password",
     "submit": "Login",
-    "username": "Username or password"
+    "username": "Username or password",
+    "invalid": {
+      "user": "Invalid credentials, please try again",
+      "pass": "Invalid credentials, please try again!!"
+    }
   },
   "button": {
     "access": "Access",

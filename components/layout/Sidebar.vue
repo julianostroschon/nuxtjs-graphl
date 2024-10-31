@@ -41,11 +41,10 @@ watch(
         :class="{ 'opacity-0': isCollapsed }"
       />
     </div>
-    <nav class="flex flex-col h-[calc(100%-4rem)] overflow-y-auto">
+    <nav class="flex flex-col gap-4 h-[calc(100%-4rem)] overflow-y-auto">
       <div class="flex-grow">
         <SidebarLinks :links="links" :isCollapsed="isCollapsed" />
       </div>
-
       <div
         @click="handleLogout"
         class="flex items-center gap-3 bg-background mx-2 mt-auto px-4 py-2 border-t rounded-lg text-muted-foreground hover:text-primary transition-colors duration-300 cursor-pointer ease-in-out"

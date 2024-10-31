@@ -35,7 +35,10 @@ function handleToggleSidebar() {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>Tcheplanner</DropdownMenuLabel>
+          <DropdownMenuLabel class="flex flex-row items-center gap-3">
+            <span>Tcheplanner</span>
+            <!-- <LanguageSwitcher size="4" /> -->
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <div v-for="link in links" :key="link.to">
             <DropdownMenuItem>
@@ -69,6 +72,9 @@ function handleToggleSidebar() {
       alt="Logo"
       :class="['h-6 transition-opacity duration-300 ease-in-out']"
     />
-    <LanguageSwitcher />
+    <div class="flex justify-center items-center gap-2">
+      <!-- <LanguageSwitcher /> -->
+      <UserSettings />
+    </div>
   </nav>
 </template>

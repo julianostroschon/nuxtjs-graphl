@@ -17,16 +17,17 @@
   },
   "button": {
     "access": "Access",
-    "cancel": "Cancelar",
-    "create": "Criar",
-    "delete": "Deletar",
-    "edit": "Editar",
-    "save": "Salvar",
-    "submit": "Enviar"
+    "cancel": "Cancel",
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "submit": "Submit"
   },
   "common": {
-    "required": "Campo obrigatório",
-    "unknown": "Erro desconhecido"
+    "required": "Required field",
+    "unknown": "Unknown error",
+    "config": "Settings"
   },
   "dashboard": {
     "home": "Welcome"
@@ -40,6 +41,11 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "projects": "Projects",
-    "tasks": "Tasks"
+    "tasks": "Tasks",
+    "user": "Users"
+  },
+  "user": {
+    "email": "E-mail",
+    "config": "User Settings"
   }
 }

@@ -26,7 +26,8 @@
   },
   "common": {
     "required": "Campo obrigatório",
-    "unknown": "Erro desconhecido"
+    "unknown": "Erro desconhecido",
+    "config": "Configurações"
   },
   "dashboard": {
     "home": "Seja bem vindo"
@@ -40,6 +41,11 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "projects": "Projetos",
-    "tasks": "Tarefas"
+    "tasks": "Tarefas",
+    "user": "Usuários"
+  },
+  "user": {
+    "email": "E-mail",
+    "config": "Configurações do Usuário"
   }
 }

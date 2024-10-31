@@ -9,7 +9,7 @@ import logger from './utils/logger'
 import type { JwtPayload } from 'jsonwebtoken'
 import { schema } from './graphql/schema'
 import { verifyToken } from './utils/jwt'
-import { createPrismaClient } from './utils/prisma'
+import { getPrismaClient } from './utils/prisma'
 
 const apollo = new ApolloServer({ schema })
 
@@ -19,7 +19,7 @@ export default startServerAndCreateH3Handler(apollo, {
     let username: string | undefined = undefined
 
     const datasource: string = getHeader(event, 'x-datasource') || 'localhost'
-    const prisma = createPrismaClient(datasource)
+    const prisma = getPrismaClient(datasource)
     const token = getCookie(event, 'sid')
     if (token !== undefined) {
       decodeToken = await verifyToken(token as string)

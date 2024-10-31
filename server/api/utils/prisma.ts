@@ -1,3 +1,16 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client'
 
-export const prisma = new PrismaClient();
+export function createPrismaClient(datasource: string): PrismaClient {
+  const databaseUrl = process.env[`DATABASE_URL_${datasource.toUpperCase()}`]
+  console.log('databaseUrl', databaseUrl)
+  if (!databaseUrl) {
+    throw new Error(`Database URL for datasource ${datasource} not found.`)
+  }
+  return new PrismaClient({
+    datasources: {
+      db: {
+        url: databaseUrl,
+      },
+    },
+  })
+}

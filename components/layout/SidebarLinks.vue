@@ -19,7 +19,12 @@ const { t } = useI18n()
     :to="link.to"
     class="flex items-center gap-3 mx-2 px-4 py-2 rounded-lg text-muted-foreground hover:text-primary transition-colors duration-300 ease-in-out"
   >
-    <Icon :name="link.icon"></Icon>
+    <CTooltip side="right">
+      <template #trigger>
+        <Icon :name="link.icon" class="flex-shrink-0"></Icon>
+      </template>
+      <p>{{ t(link.text) }}</p>
+    </CTooltip>
     <span
       class="text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ease-in-out"
       :class="props.isCollapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'"

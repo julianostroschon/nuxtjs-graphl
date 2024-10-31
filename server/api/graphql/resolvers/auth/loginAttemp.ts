@@ -26,7 +26,7 @@ export const loginAttemp: FieldResolver<'Mutation', 'login'> = async (
   )
 
   const cookieOptions = {
-    httpOnly: true,
+    // httpOnly: true,
     domain: process.env.SERVER_DOMAIN || undefined,
     maxAge: 60 * 30,
     sameSite: 'strict' as const, // ou 'lax' dependendo da sua necessidade

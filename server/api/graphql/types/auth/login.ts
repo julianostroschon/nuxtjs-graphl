@@ -32,6 +32,9 @@ export const Login = extendType({
       type: LoginResponse,
       args: { credentials: nonNull(loginCredentials) },
       resolve: loginAttemp,
+      extensions: {
+        publicOperations: true, // Isso será checado no plugin
+      },
     })
   },
 })

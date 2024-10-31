@@ -1,26 +1,28 @@
-import { createPlugin } from 'nexus'
+import { GraphQLError } from 'graphql'
+import { plugin } from 'nexus'
 
-const AuthPlugin = createPlugin({
+const AuthPlugin = plugin({
   name: 'AuthPlugin',
   description: 'Plugin to add auth to the context',
+
   onCreateFieldResolver(config) {
     return async (root, args, ctx, info, next) => {
+      if (ctx.authChecked) {
+        return next(root, args, ctx, info)
+      }
+
       const extensions = config.fieldConfig.extensions ?? {}
+
       const isPublic =
         'publicOperations' in extensions
           ? (extensions as { publicOperations?: boolean }).publicOperations
           : false
-      console.log('Extensions:', config)
-      // const token = getCookie(info, 'sid')
-      // const decodeToke = await verifyToken(token as string)
 
-      // console.log('Headers:', decodeToke)
-      console.log('isPublic', isPublic)
-      // if (config.fieldConfig.extensions?.auth) {
-      //   if (!ctx.user) {
-      //     throw new Error('Unauthorized')
-      //   }
-      // }
+      if (!isPublic && !ctx.username) {
+        throw new GraphQLError('Unauthorized')
+      }
+
+      ctx.authChecked = true
       return next(root, args, ctx, info)
     }
   },

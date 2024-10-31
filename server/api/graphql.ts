@@ -27,15 +27,12 @@ export default startServerAndCreateH3Handler(apollo, {
     if (decodeToken !== undefined) {
       username = decodeToken.email
     }
-    const loggi = logger.child({ username: username })
-
-    // const authorizationHeader = headers['authorization'] || ''
-    // console.log('Authorization Header:', authorizationHeader)
+    const log = logger.child({ username: username, datasource })
 
     return {
       prisma,
       event,
-      logger: loggi,
+      logger: log,
       username,
       datasource,
     }

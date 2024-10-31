@@ -31,7 +31,6 @@ const onSubmit = handleSubmit(async values => {
     await new Promise(resolve => setTimeout(resolve, 1000))
     const data = await GqlLogin({ credentials: values })
     const { login } = data
-    authStore.setUser({ username: login?.username || '' })
     authStore.setToken(login?.token || '')
     router.push('/')
   } catch (error) {

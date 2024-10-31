@@ -11,10 +11,9 @@ export const loginAttemp: FieldResolver<'Mutation', 'login'> = async (
   { prisma, logger },
 ) => {
   const event = useEvent()
-  const loggi = logger.child({ graphql: 'mutation.login' })
-  loggi.debug('sid', 'aqui')
+  const log = logger.child({ graphql: 'mutation.login' })
   await loginValidation.validate(credentials)
-  const existingUser = await getExistingUser(prisma, loggi, credentials)
+  const existingUser = await getExistingUser(prisma, log, credentials)
   const encodedToken = await createToken(
     {
       id: existingUser.id,
@@ -35,7 +34,7 @@ export const loginAttemp: FieldResolver<'Mutation', 'login'> = async (
   }
 
   setCookie(event, 'sid', encodedToken, cookieOptions)
-
+  log.info(`User ${credentials.username} logged in`)
   return {
     username: credentials.username,
     email: existingUser.email,

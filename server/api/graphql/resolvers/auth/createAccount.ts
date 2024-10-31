@@ -1,4 +1,3 @@
-import type { PrismaClient } from '@prisma/client'
 import { hash } from 'bcrypt'
 import type { FieldResolver } from 'nexus'
 import nodemailer from 'nodemailer'
@@ -8,18 +7,23 @@ import { generateVerificationEmail } from '../../../mail/verifyAccount'
 import { getRedisClient } from '../../../utils/redis'
 import { registrationValidation } from '../../../utils/registrationValidation'
 
+import { GraphQLError } from 'graphql'
 import { nanoid } from 'nanoid'
+import { verifyExistingUser } from '~/server/api/domains/users/verifyExistUser'
 
 export const createAccount: FieldResolver<'Mutation', 'createAccount'> = async (
   _,
   { credentials },
-  { prisma, logger, username },
+  { prisma, logger },
 ) => {
-  const loggi = logger.child({ graphql: 'mutation.createAccount' })
-  loggi.info(`Creating account ${username}`)
+  const log = logger.child({ graphql: 'mutation.createAccount' })
 
   await registrationValidation.validate(credentials)
-  await verifyExistUser(prisma, credentials)
+  const user = await verifyExistingUser(prisma, log, credentials)
+  if (user) {
+    log.error('User already exists')
+    throw new GraphQLError('auth.user.exists')
+  }
   const hashedPass = await hash(credentials.password, 9)
   const key = nanoid()
 
@@ -46,28 +50,10 @@ export const createAccount: FieldResolver<'Mutation', 'createAccount'> = async (
     console.log(`Message id: ${info.messageId}`)
     console.log(`URL: ${nodemailer.getTestMessageUrl(info)}`)
   })
+  log.info(`Solicitação de registro para ${credentials.username} enviada`)
 
   return {
     message:
       'Thanks for registering! Check your email for instructions on how to verify your account.',
-  }
-}
-
-const verifyExistUser = async (
-  prisma: PrismaClient,
-  credentials: { email: string; username: string },
-) => {
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      username: credentials.username,
-      OR: [
-        {
-          email: credentials.email,
-        },
-      ],
-    },
-  })
-  if (existingUser !== null) {
-    throw new Error('User or username already exists')
   }
 }

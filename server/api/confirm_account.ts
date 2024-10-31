@@ -1,4 +1,4 @@
-import { createPrismaClient } from './utils/prisma'
+import { getPrismaClient } from './utils/prisma'
 import { getRedisClient } from './utils/redis'
 
 export default defineEventHandler(async event => {
@@ -39,7 +39,7 @@ const handleRedisQuery = async (
   }
   const host = window.location.host
   const subdomain = isProduction ? host.split('.')[0] : 'localhost'
-  const prisma = createPrismaClient(subdomain)
+  const prisma = getPrismaClient(subdomain)
 
   await prisma.user.create({
     data: {

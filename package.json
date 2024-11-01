@@ -10,7 +10,8 @@
     "postinstall": "nuxt prepare",
     "gql:gen": "node ./generate-schema.cjs",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "migrate": "bash ./scripts/migrate.sh"
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",

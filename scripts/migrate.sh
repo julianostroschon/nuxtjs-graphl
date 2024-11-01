@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Carrega as variáveis de ambiente do arquivo .env
+set -o allexport
+source .env
+set +o allexport
+
 # Lista de clientes (datasources)
 clients=("LOCALHOST" "CLIENTE1" "CLIENTE2") # Adicione mais clientes conforme necessário
 

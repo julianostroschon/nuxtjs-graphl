@@ -2,16 +2,16 @@ services:
   database:
     image: postgres:16-alpine
     ports:
-      - 5432:5432
+      - '${DB_PORT:-4321}:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=local
+      POSTGRES_DB: ${DB_NAME:-local}
+      POSTGRES_USER: ${DB_USER:-root}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-root}
   cache:
     image: redis
     ports:
-      - 5002:6379
+      - '${REDIS_PORT:-5002}:6379'
 volumes:
   pgdata:

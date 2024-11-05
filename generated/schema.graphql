@@ -27,6 +27,7 @@ type Query {
   getUsers(pageArgs: PageArgs, userArgs: UserArgs): UserList
   implicitLogin: implicitLoginResponse
   ping: String
+  pong: String
 }
 
 input UserArgs {

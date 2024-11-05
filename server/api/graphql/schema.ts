@@ -1,5 +1,5 @@
 import { makeSchema } from 'nexus'
-import { join } from 'path'
+import path, { join } from 'path'
 
 import * as types from './types'
 
@@ -15,4 +15,9 @@ const outputs = {
 export const schema = makeSchema({
   outputs,
   types,
+  contextType: {
+    module: path.join(process.cwd(), './server/types/context.ts'),
+    // module: path.join(__dirname, '../contracts'),
+    export: 'Context',
+  },
 })

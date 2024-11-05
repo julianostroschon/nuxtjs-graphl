@@ -17,7 +17,6 @@ export class RabbitMQProducer {
         logger.info({ queue: this.queue }, `Conexão já aberta`)
         return
       }
-      console.log({ connection: getUrl() })
       this.connection = await connect(getUrl())
       this.channel = await this.connection.createChannel()
 

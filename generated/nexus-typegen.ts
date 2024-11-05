@@ -4,6 +4,7 @@
  */
 
 
+import type { Context } from "./../server/types/context"
 import type { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -122,6 +123,7 @@ export interface NexusGenFieldTypes {
     getUsers: NexusGenRootTypes['UserList'] | null; // UserList
     implicitLogin: NexusGenRootTypes['implicitLoginResponse'] | null; // implicitLoginResponse
     ping: string | null; // String
+    pong: string | null; // String
   }
   UserList: { // field return type
     nodes: NexusGenRootTypes['UserResponse'][] | null; // [UserResponse!]
@@ -166,6 +168,7 @@ export interface NexusGenFieldTypeNames {
     getUsers: 'UserList'
     implicitLogin: 'implicitLoginResponse'
     ping: 'String'
+    pong: 'String'
   }
   UserList: { // field return type name
     nodes: 'UserResponse'
@@ -245,7 +248,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

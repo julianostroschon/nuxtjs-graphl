@@ -1,11 +1,8 @@
 import { ApolloServer } from '@apollo/server'
 import { startServerAndCreateH3Handler } from '@as-integrations/h3'
 
-import { makeSchema } from 'nexus'
-import { join } from 'path'
-import { RabbitQueue } from '../queue/rabbitmq/contracts'
-import { buildQueueProducer } from '../queue/rabbitmq/producer'
-import * as types from './graphql/types'
+import { buildQueueProducer } from '../queue'
+import { schema } from './graphql/schema'
 import logger from './utils/logger'
 import { prisma } from './utils/prisma'
 
@@ -15,24 +12,11 @@ import { prisma } from './utils/prisma'
 //   event: H3Event
 // }
 
-const schema = makeSchema({
-  types,
-  outputs: {
-    schema: join(process.cwd(), 'generated/schema.graphql'),
-    typegen: join(process.cwd(), 'generated/nexus-typegen.ts'),
-  },
-})
-
-const apollo = new ApolloServer({ schema: schema })
+const apollo = new ApolloServer({ schema })
 
 export default startServerAndCreateH3Handler(apollo, {
   context: async event => {
-    const cachequeue = new Map<'queue', RabbitQueue>()
-    if (cachequeue.get('queue') === undefined) {
-      cachequeue.set('queue', await buildQueueProducer())
-    }
-
-    const queue = cachequeue.get('queue')
+    const queue = await buildQueueProducer()
 
     return {
       logger,

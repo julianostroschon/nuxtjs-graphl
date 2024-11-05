@@ -1,7 +1,7 @@
 import type { RabbitQueue } from './contracts'
 import { RabbitMQProducer } from './entity'
 
-export async function buildQueueProducer(): Promise<RabbitQueue> {
+export async function queueProducer(): Promise<RabbitQueue> {
   const rabbit = new RabbitMQProducer(process.env.RABBIT_QUEUE_NAME || 'queue')
 
   await rabbit.connect()

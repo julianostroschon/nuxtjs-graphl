@@ -7,7 +7,7 @@ import { getContent, getUrl, queueConfig } from './lib'
 export class RabbitMQProducer {
   private connection: Connection
   private channel: Channel
-  private isOpen: boolean
+  private isOpen: boolean = false
 
   constructor(private readonly queue: string) {}
 
@@ -17,6 +17,7 @@ export class RabbitMQProducer {
         logger.info({ queue: this.queue }, `Conexão já aberta`)
         return
       }
+      console.log({ connection: getUrl() })
       this.connection = await connect(getUrl())
       this.channel = await this.connection.createChannel()
 

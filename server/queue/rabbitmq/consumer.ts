@@ -1,20 +1,11 @@
 import { connect, ConsumeMessage, type Options, type Replies } from 'amqplib'
-import type { Listener } from './contracts'
+import { RabbitMQConsumer } from './contracts'
 
-export interface RabbitMQClient {
-  path: string
-  on: (event: string, listener: Listener) => Promise<Replies.Consume>
-  close: () => Promise<void>
-  send: (queue: string, event: string) => Promise<void>
-}
-
-export async function buildRabbitMQClient(config: Options.Connect) {
-  const conn = await connect({
-    hostname: config.hostname,
-    username: config.username,
-    password: config.password,
-    port: config.port,
-  })
+export async function buildRabbitMQClient(
+  config: Options.Connect,
+): Promise<RabbitMQConsumer> {
+  // const connection = getUrl()
+  const conn = await connect(config)
   const channel = await conn.createChannel()
 
   return {

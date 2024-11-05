@@ -1,5 +1,5 @@
 import type { Options } from 'amqplib'
-import { RabbitConnectionOptions } from '../contracts'
+// import { RabbitConnectionOptions } from '../contracts'
 import { QueueConfig } from './contracts'
 
 export function getUrl(): Options.Connect {
@@ -17,10 +17,18 @@ export function getContent(message: string): Buffer {
 }
 
 export const queueConfig: QueueConfig = Object.freeze({
-  RABBIT_HOST: process.env.RABBIT_HOST,
-  RABBIT_PORT: Number(process.env.RABBIT_PORT),
-  RABBIT_USERNAME: process.env.RABBITMQ_DEFAULT_USER,
-  RABBIT_PASSWORD: process.env.RABBITMQ_DEFAULT_PASS,
+  RABBIT_HOST: process.env.RABBIT_HOST ?? 'localhost',
+  RABBIT_PORT: Number(process.env.RABBIT_PORT) ?? 5672,
+  RABBIT_USERNAME: process.env.RABBIT_USER ?? 'guest',
+  RABBIT_PASSWORD: process.env.RABBIT_PASSWORD ?? 'guest',
   RABBIT_DURABILITY: process.env.RABBIT_DURABILITY === 'true',
-  RABBIT_QUEUE_NAME: process.env.RABBIT_QUEUE_NAME,
+  RABBIT_QUEUE_NAME: process.env.RABBIT_QUEUE_NAME ?? 'queue',
 })
+// export const config: Options.Connect & { host: string } = Object.freeze({
+//   host: queueConfig.RABBIT_HOST,
+//   port: queueConfig.RABBIT_PORT,
+//   username: queueConfig.RABBIT_USERNAME,
+//   password: queueConfig.RABBIT_PASSWORD,
+//   durability: queueConfig.RABBIT_DURABILITY,
+//   queueName: queueConfig.RABBIT_QUEUE_NAME,
+// })

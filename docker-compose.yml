@@ -13,5 +13,15 @@ services:
     image: redis
     ports:
       - '${REDIS_PORT:-5002}:6379'
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    hostname: 'rabbitmq'
+    container_name: 'rabbitmq-server'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBIT_USER:-user}
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASSWORD:-password}
+    ports:
+      - '${RABBIT_PORT:-5672}:5672'    # Porta padrão do RabbitMQ
+      - '${RABBIT_WEB_PORT:-15672}:15672'  # Porta da interface de gerenciamento web
 volumes:
   pgdata:

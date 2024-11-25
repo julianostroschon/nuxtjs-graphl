@@ -1,74 +1,39 @@
 <script setup lang="ts">
+import { LogoutBtn, MenuBtn } from '@/components/ui/button'
 import { useLogout } from './logout'
 import { links } from './menu.Links'
-const emits = defineEmits(['toggleSidebar'])
-const props = defineProps<{
-  isSidebarCollapsed: boolean
-}>()
+import { MenuList } from '@/components/ui/menu'
+import { BusinessLabel } from '@/components/ui/label'
+// const emits = defineEmits(['toggleSidebar'])
+
 const { handleLogout } = useLogout()
 
+const isSidebarCollapsed = ref(true)
+
 function handleToggleSidebar() {
-  emits('toggleSidebar')
+  isSidebarCollapsed.value = !isSidebarCollapsed.value
+  // emits('toggleSidebar')
 }
 </script>
 
 <template>
-  <nav
-    class="flex justify-between items-center gap-2 bg-muted/40 px-4 border-b h-16"
-  >
-    <button
-      @click="handleToggleSidebar"
-      variant="outline"
-      size="icon"
-      class="md:block hidden w-8 h-8 transition-transform duration-300 ease-in-out"
-      :class="{ 'rotate-180': props.isSidebarCollapsed }"
-    >
-      <iconify-icon icon="lucide:menu"></iconify-icon>
-    </button>
-    <div class="md:hidden">
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <img
-            class="h-7 transition-opacity duration-300 ease-in-out"
-            src="/images/tcheplanner-elemento.png"
-            alt="Logo"
-          />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>Tcheplanner</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <div v-for="link in links" :key="link.to">
-            <DropdownMenuItem>
-              <RouterLink :to="link.to" class="flex items-center gap-2">
-                <iconify-icon :icon="link.icon"></iconify-icon>
-                <span>{{ $t(link.text) }}</span>
-              </RouterLink>
-            </DropdownMenuItem>
-          </div>
-          <DropdownMenuSeparator />
-          <!-- <div v-for="link in linksFooter" :key="link.to">
-            <DropdownMenuItem>
-              <RouterLink :to="link.to" class="flex items-center gap-2">
-                <iconify-icon :icon="link.icon"></iconify-icon>
-                <span>{{ link.text }}</span>
-              </RouterLink>
-            </DropdownMenuItem>
-          </div> -->
-          <DropdownMenuItem>
-            <button @click="handleLogout" class="flex items-center gap-2">
-              <iconify-icon icon="lucide:log-out"></iconify-icon>
-              <span>{{ $t('auth.logout') }}</span>
-            </button>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+  <nav class="flex justify-start items-center gap-4 bg-muted/40 p-6 border-b-2">
+    <div class="flex justify-between items-center top-1 absolute left-2">
+      <MenuBtn :isSidebarCollapsed @toggleSidebar="handleToggleSidebar" />
+      <BusinessLabel class="p-1/5" />
     </div>
-
-    <img
-      src="/images/logo-tcheplanner.png"
-      alt="Logo"
-      :class="['h-6 transition-opacity duration-300 ease-in-out']"
-    />
+    <div
+      :class="!!isSidebarCollapsed ? 'hidden' : 'block'"
+      class="transition-transform duration-1000 ease-in-out flex flex-col pt-4"
+    >
+      <MenuList :links />
+      <LogoutBtn
+        @click="handleLogout"
+        text-class="text-sm font-semibold"
+        class="text-red-500"
+      />
+    </div>
     <LanguageSwitcher />
   </nav>
+  <slot />
 </template>

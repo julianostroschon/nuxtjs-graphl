@@ -4,7 +4,7 @@ export default defineComponent({
 
   setup() {
     definePageMeta({
-      layout: 'header-layout',
+      layout: 'default',
     })
     return {
       name: 'UserIndex',

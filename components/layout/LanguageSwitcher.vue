@@ -1,25 +1,22 @@
 <template>
-  <button @click="toggleLanguage">
-    <Icon
-      :name="
-        currentLanguage === 'en'
-          ? 'twemoji:flag-for-flag-united-states'
-          : 'twemoji:flag-for-flag-brazil'
-      "
-      class="w-10 h-10"
-    />
-  </button>
+  <Icon
+    @click="toggleLanguage"
+    :name
+  />
 </template>
 
 <script setup lang="ts">
-// import { loadLanguageAsync } from '@/modules/i18n'
 import { ref } from 'vue'
 
-const { locale } = useI18n()
+const { locale, setLocale } = useI18n() 
 const currentLanguage = ref(locale.value)
+
+const name = computed(() => currentLanguage.value === 'en'
+          ? 'twemoji:flag-for-flag-united-states'
+          : 'twemoji:flag-for-flag-brazil')
 
 async function toggleLanguage() {
   currentLanguage.value = currentLanguage.value === 'en' ? 'pt-BR' : 'en'
-  // await loadLanguageAsync(currentLanguage.value)
+  setLocale(currentLanguage.value)
 }
 </script>

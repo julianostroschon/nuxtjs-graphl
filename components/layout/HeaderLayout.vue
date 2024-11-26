@@ -11,12 +11,16 @@ function handleToggleSidebar() {
   isSidebarCollapsed.value = !isSidebarCollapsed.value
 }
 
-const sideBarClass = computed<'hidden'| 'block'>(() => !!isSidebarCollapsed.value ? 'hidden' : 'block')
+const sideBarClass = computed<'hidden' | 'block'>(() =>
+  !!isSidebarCollapsed.value ? 'hidden' : 'block',
+)
 </script>
 
 <template>
-  <nav class="flex-col justify-start items-center gaps-4 bg-muted/40 border-b-2">
-    <div class="w-full flex justify-between	items-center p-2">
+  <nav
+    class="flex-col justify-start items-center gaps-4 bg-muted/40 border-b-2"
+  >
+    <div class="w-full flex justify-between items-center p-2">
       <MenuBtn :isSidebarCollapsed @toggleSidebar="handleToggleSidebar" />
       <BusinessLabel class="p-1/5" />
       <LanguageSwitcher class="w-5 h-5 p-5" />

@@ -121,9 +121,7 @@
       "uniqueConstraints": [
         {
           "name": "_prisma_migrations_pkey",
-          "fields": [
-            "id"
-          ],
+          "fields": ["id"],
           "nullNotDistinct": false
         }
       ]
@@ -225,23 +223,17 @@
       "uniqueConstraints": [
         {
           "name": "users_pkey",
-          "fields": [
-            "id"
-          ],
+          "fields": ["id"],
           "nullNotDistinct": false
         },
         {
           "name": "users_email_key",
-          "fields": [
-            "email"
-          ],
+          "fields": ["email"],
           "nullNotDistinct": false
         },
         {
           "name": "users_username_key",
-          "fields": [
-            "username"
-          ],
+          "fields": ["username"],
           "nullNotDistinct": false
         }
       ]

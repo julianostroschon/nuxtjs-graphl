@@ -6,7 +6,7 @@ if (!process.env.JWT_SECRET) {
 
 export const createToken = (
   paylod: string | Buffer | object,
-  options: jwt.SignOptions
+  options: jwt.SignOptions,
 ) => {
   return new Promise<string>((resolve, reject) => {
     jwt.sign(
@@ -18,7 +18,7 @@ export const createToken = (
           return reject(err)
         }
         return resolve(encoded as string)
-      }
+      },
     )
   })
 }

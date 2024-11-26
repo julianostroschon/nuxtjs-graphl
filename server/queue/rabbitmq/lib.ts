@@ -1,5 +1,4 @@
 import type { Options } from 'amqplib'
-import { RabbitConnectionOptions } from '../contracts'
 import { QueueConfig } from './contracts'
 
 export function getUrl(): Options.Connect {

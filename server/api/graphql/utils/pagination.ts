@@ -7,5 +7,5 @@ export const Pagination = objectType({
     t.nonNull.int('page')
     t.nonNull.int('pageSize')
     t.nonNull.boolean('hasMore')
-  }
+  },
 })

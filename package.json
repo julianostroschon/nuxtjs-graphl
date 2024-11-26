@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare",
     "gql:gen": "node ./generate-schema.cjs",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/",
+    "format": "prettier --write .",
     "migrate": "prisma migrate dev",
     "seed": "npx prisma db seed"
   },

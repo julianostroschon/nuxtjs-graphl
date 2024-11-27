@@ -6,17 +6,17 @@ export default defineNuxtRouteMiddleware(to => {
   const user = useCookie('authUser').value
 
   // Define public routes
-  const publicRoutes = ['/login', '/register']
+  // const publicRoutes = ['/login', '/register']
 
   // Check if the current route is public
-  if (publicRoutes.includes(to.path)) {
-    return
-  }
+  // if (publicRoutes.includes(to.path)) {
+  //   return
+  // }
 
   // Redirect to login if no token is found
-  if (!token) {
-    return navigateTo('/login')
-  }
+  // if (!token) {
+  //   return navigateTo('/login')
+  // }
 
   // Persist authStore state from cookies
   if (token && !authStore.token) {

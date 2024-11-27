@@ -22,6 +22,7 @@
     "@as-integrations/h3": "^1.2.1",
     "@nuxt/icon": "^1.6.1",
     "@nuxt/types": "^2.18.1",
+    "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/i18n": "^8.5.5",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@pinia/nuxt": "^0.6.0",
@@ -92,5 +93,6 @@
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "vitest": "^2.1.4"
-  }
+  },
+  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387"
 }

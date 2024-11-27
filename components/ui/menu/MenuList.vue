@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-for="{ to, icon: name, text } in links"
-    :key="to"
-    class="hover:ring-1 ring-offset-1 ring-slate-400"
-  >
+  <div v-for="{ to, icon: name, text } in links" :key="to">
     <RouterLink :to class="flex items-center gap-2">
       <Icon :name />
       <span class="text-sm">{{ $t(text) }}</span>

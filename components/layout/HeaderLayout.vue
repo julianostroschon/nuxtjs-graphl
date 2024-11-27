@@ -2,7 +2,11 @@
 import { MenuList } from '@/components/ui/menu'
 import { useLogout } from './logout'
 import { links } from './menu.Links'
-
+import SwitchTheme from '../ui/switch/SwitchTheme.vue'
+// const colorMode = useColorMode()
+definePageMeta({
+  colorMode: 'light',
+})
 const { handleLogout } = useLogout()
 
 const isSidebarCollapsed = ref<boolean>(true)
@@ -26,15 +30,20 @@ const sideBarClass = computed<'hidden' | 'block'>(() =>
       <LanguageSwitcher class="w-5 h-5 p-5" />
     </div>
     <div
-      class="transition-transform duration-1000 ease-in-out flex flex-col border-b-2"
+      class="transition-transform duration-1000 ease-in-out flex flex-col items-start px-5 py-2 relative bg-slate-200 shadow-md shadow-inner shadow-top"
       :class="sideBarClass"
     >
-      <MenuList :links />
-      <LogoutBtn
-        @click="handleLogout"
-        text-class="text-sm font-semibold"
-        class="text-red-500"
-      />
+      <MenuList class="flex flex-end" :links />
+      <div
+        class="flex justify-around shadow-md p-2 w-50 gap-2 content bg-white dark:bg-slate-800 rounded-md"
+      >
+        <LogoutBtn
+          @click="handleLogout"
+          text-class="text-sm font-semibold"
+          class="text-red-500 dark:text-red-100"
+        />
+        <SwitchTheme />
+      </div>
     </div>
   </nav>
   <slot />

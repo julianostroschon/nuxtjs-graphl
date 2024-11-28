@@ -4,9 +4,10 @@ import { useLogout } from './logout'
 import { links } from './menu.Links'
 import SwitchTheme from '../ui/switch/SwitchTheme.vue'
 // const colorMode = useColorMode()
-definePageMeta({
-  colorMode: 'light',
-})
+// definePageMeta({
+//   colorMode: 'light',
+// })
+import FooterPage from '../ui/footer/FooterPage.vue'
 const { handleLogout } = useLogout()
 
 const isSidebarCollapsed = ref<boolean>(true)
@@ -26,7 +27,7 @@ const sideBarClass = computed<'hidden' | 'block'>(() =>
   >
     <div class="w-full flex justify-between items-center p-2">
       <MenuBtn :isSidebarCollapsed @toggleSidebar="handleToggleSidebar" />
-      <BusinessLabel class="p-1/5" />
+      <BusinessLabel :name class="p-1/5" />
       <LanguageSwitcher class="w-5 h-5 p-5" />
     </div>
     <div
@@ -47,4 +48,6 @@ const sideBarClass = computed<'hidden' | 'block'>(() =>
     </div>
   </nav>
   <slot />
+  <ColorModePicker class="absolute bottom-0 right-0" />
+  <FooterPage :name :version />
 </template>

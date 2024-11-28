@@ -1,0 +1,1 @@
+import * as FooterPage from './FooterPage.vue'

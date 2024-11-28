@@ -32,6 +32,9 @@ export interface NexusGenInputs {
     skip: number; // Int!
     take: number; // Int!
   }
+  ProductArgs: { // input type
+    id?: number | null; // Int
+  }
   UserArgs: { // input type
     email?: string | null; // String
     id?: number | null; // Int
@@ -67,6 +70,11 @@ export interface NexusGenObjects {
     page: number; // Int!
     pageSize: number; // Int!
     totalCount: number; // Int!
+  }
+  ProductResponse: { // root type
+    id: number; // Int!
+    name: string; // String!
+    price: string; // String!
   }
   Query: {};
   UserList: { // root type
@@ -117,11 +125,17 @@ export interface NexusGenFieldTypes {
     pageSize: number; // Int!
     totalCount: number; // Int!
   }
+  ProductResponse: { // field return type
+    id: number; // Int!
+    name: string; // String!
+    price: string; // String!
+  }
   Query: { // field return type
     getUser: NexusGenRootTypes['UserResponse'] | null; // UserResponse
     getUsers: NexusGenRootTypes['UserList'] | null; // UserList
     implicitLogin: NexusGenRootTypes['implicitLoginResponse'] | null; // implicitLoginResponse
     ping: string | null; // String
+    productGet: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
   }
   UserList: { // field return type
     nodes: NexusGenRootTypes['UserResponse'][] | null; // [UserResponse!]
@@ -161,11 +175,17 @@ export interface NexusGenFieldTypeNames {
     pageSize: 'Int'
     totalCount: 'Int'
   }
+  ProductResponse: { // field return type name
+    id: 'Int'
+    name: 'String'
+    price: 'String'
+  }
   Query: { // field return type name
     getUser: 'UserResponse'
     getUsers: 'UserList'
     implicitLogin: 'implicitLoginResponse'
     ping: 'String'
+    productGet: 'ProductResponse'
   }
   UserList: { // field return type name
     nodes: 'UserResponse'
@@ -210,6 +230,9 @@ export interface NexusGenArgTypes {
     getUsers: { // args
       pageArgs?: NexusGenInputs['PageArgs'] | null; // PageArgs
       userArgs?: NexusGenInputs['UserArgs'] | null; // UserArgs
+    }
+    productGet: { // args
+      id?: number | null; // Int
     }
   }
 }

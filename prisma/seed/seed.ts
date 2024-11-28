@@ -5,47 +5,17 @@
  * Learn more about the Seed Client by following our guide: https://docs.snaplet.dev/seed/getting-started
  */
 import { PrismaClient } from '@prisma/client'
-import { genSalt, hash } from 'bcrypt'
-
-const basePassword = '1234567890x1'
-const adminEmail = 'demo@demo.com'
-const moderatorEmail = 'mod@demo.com'
-
-// const genHash = async () =>
-//   await hash(basePassword, process.env.BCRYPT_SALT || 10)
-
+import { seedProducts } from './products'
+import { seedUsers } from './users'
 ;(async () => {
   const prisma = new PrismaClient()
-  const salt = await genSalt(Number(process.env.BCRYPT_SALT) || 10)
-  const passhash = await hash(basePassword, salt)
 
-  // Truncate all tables in the database
-  // await seed.$resetDatabase()
+  await seedUsers(prisma)
+  await seedProducts(prisma)
 
-  // Seed the database with 10 user
-  // await seed.user(x => {
-  //   return x(2)
-  // })
-  await prisma.user.deleteMany()
-
-  await prisma.user.create({
-    data: {
-      username: 'Admin',
-      email: adminEmail,
-      passhash,
-    },
-    // },
-  })
-  await prisma.user.create({
-    data: {
-      email: moderatorEmail,
-      username: 'Moderator',
-      passhash,
-    },
-  })
   // Type completion not working? You might want to reload your TypeScript Server to pick up the changes
 
-  console.log('Database seeded successfully!')
+  console.log('🌱 Database seeded successfully!')
 
   process.exit()
 })()

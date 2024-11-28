@@ -1,6 +1,7 @@
 import { extendType, inputObjectType, objectType } from 'nexus'
 
 import { productGet } from '../../resolvers/products/product'
+import { productLoad } from '../../resolvers/products/products'
 
 export const ProductGet = extendType({
   type: 'Query',
@@ -12,6 +13,24 @@ export const ProductGet = extendType({
       extensions: {
         protectedOperation: true, // Isso será checado no plugin
       },
+    })
+  },
+})
+
+export const ProductList = objectType({
+  name: 'ProductList',
+  definition: t => {
+    t.list.nonNull.field('nodes', { type: ProductResponse })
+    // t.nonNull.field('pagination', { type: Pagination })
+  },
+})
+
+export const productLoadQuery = extendType({
+  type: 'Query',
+  definition: t => {
+    t.list.nonNull.field('productLoad', {
+      type: ProductResponse,
+      resolve: productLoad,
     })
   },
 })
@@ -28,7 +47,7 @@ export const ProductResponse = objectType({
   definition: t => {
     t.nonNull.int('id')
     t.nonNull.string('name')
-    t.nonNull.string('price')
+    t.string('price')
     // t.nonNull.field('createdAt', { type: DateScalar })
   },
 })

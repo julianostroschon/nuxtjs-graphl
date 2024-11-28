@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ name: string; version: string }>()
+import { name, version } from '@/utils/constants'
 </script>
 <template>
   <footer class="absolute bottom-0 left-0 w-full bg-slate-900 text-slate-100">

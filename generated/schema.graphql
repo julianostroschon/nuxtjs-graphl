@@ -26,10 +26,14 @@ input ProductArgs {
   id: Int
 }
 
+type ProductList {
+  nodes: [ProductResponse!]
+}
+
 type ProductResponse {
   id: Int!
   name: String!
-  price: String!
+  price: String
 }
 
 type Query {
@@ -38,6 +42,7 @@ type Query {
   implicitLogin: implicitLoginResponse
   ping: String
   productGet(id: Int): ProductResponse
+  productLoad: [ProductResponse!]
 }
 
 input UserArgs {

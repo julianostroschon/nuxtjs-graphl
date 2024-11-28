@@ -1,1 +1,1 @@
-import * as FooterPage from './FooterPage.vue'
+export { default as FooterPage } from './FooterPage.vue'

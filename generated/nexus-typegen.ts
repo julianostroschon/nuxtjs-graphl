@@ -71,10 +71,13 @@ export interface NexusGenObjects {
     pageSize: number; // Int!
     totalCount: number; // Int!
   }
+  ProductList: { // root type
+    nodes?: NexusGenRootTypes['ProductResponse'][] | null; // [ProductResponse!]
+  }
   ProductResponse: { // root type
     id: number; // Int!
     name: string; // String!
-    price: string; // String!
+    price?: string | null; // String
   }
   Query: {};
   UserList: { // root type
@@ -125,10 +128,13 @@ export interface NexusGenFieldTypes {
     pageSize: number; // Int!
     totalCount: number; // Int!
   }
+  ProductList: { // field return type
+    nodes: NexusGenRootTypes['ProductResponse'][] | null; // [ProductResponse!]
+  }
   ProductResponse: { // field return type
     id: number; // Int!
     name: string; // String!
-    price: string; // String!
+    price: string | null; // String
   }
   Query: { // field return type
     getUser: NexusGenRootTypes['UserResponse'] | null; // UserResponse
@@ -136,6 +142,7 @@ export interface NexusGenFieldTypes {
     implicitLogin: NexusGenRootTypes['implicitLoginResponse'] | null; // implicitLoginResponse
     ping: string | null; // String
     productGet: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
+    productLoad: NexusGenRootTypes['ProductResponse'][] | null; // [ProductResponse!]
   }
   UserList: { // field return type
     nodes: NexusGenRootTypes['UserResponse'][] | null; // [UserResponse!]
@@ -175,6 +182,9 @@ export interface NexusGenFieldTypeNames {
     pageSize: 'Int'
     totalCount: 'Int'
   }
+  ProductList: { // field return type name
+    nodes: 'ProductResponse'
+  }
   ProductResponse: { // field return type name
     id: 'Int'
     name: 'String'
@@ -186,6 +196,7 @@ export interface NexusGenFieldTypeNames {
     implicitLogin: 'implicitLoginResponse'
     ping: 'String'
     productGet: 'ProductResponse'
+    productLoad: 'ProductResponse'
   }
   UserList: { // field return type name
     nodes: 'UserResponse'

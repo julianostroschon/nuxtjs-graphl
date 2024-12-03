@@ -32,11 +32,14 @@ export const Login = extendType({
       type: LoginResponse,
       args: { credentials: nonNull(loginCredentials) },
       resolve: loginAttemp,
+      extensions: {
+        publicOperations: true, // Isso será checado no plugin
+      },
     })
   },
 })
 
-const ImplicitLoginResponse = objectType({
+export const ImplicitLoginResponse = objectType({
   name: 'implicitLoginResponse',
   definition: t => {
     t.nonNull.boolean('loggedIn')
@@ -46,7 +49,7 @@ const ImplicitLoginResponse = objectType({
   },
 })
 
-const LoginResponse = objectType({
+export const LoginResponse = objectType({
   name: 'loginResponse',
   definition: t => {
     t.nonNull.string('username')
@@ -56,7 +59,7 @@ const LoginResponse = objectType({
   },
 })
 
-const loginCredentials = inputObjectType({
+export const loginCredentials = inputObjectType({
   name: 'loginCredentials',
   definition: t => {
     t.nonNull.string('username')
@@ -64,7 +67,7 @@ const loginCredentials = inputObjectType({
   },
 })
 
-const Credentials = inputObjectType({
+export const Credentials = inputObjectType({
   name: 'credentials',
   definition: t => {
     t.nonNull.string('email')
@@ -73,7 +76,7 @@ const Credentials = inputObjectType({
   },
 })
 
-const RegisterResponse = objectType({
+export const RegisterResponse = objectType({
   name: 'registerResponse',
   definition: t => {
     t.nonNull.string('message')

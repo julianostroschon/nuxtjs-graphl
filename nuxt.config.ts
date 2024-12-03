@@ -36,6 +36,7 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  plugins: ['~/plugins/graphql-headers.ts'],
   css: ['~/assets/css/main.css'],
   shadcn: {
     prefix: '',

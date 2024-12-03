@@ -4,15 +4,19 @@ import { FooterPage } from '@/components/ui/footer'
 import { useLogout } from './logout'
 import { links } from './menu.Links'
 const { handleLogout } = useLogout()
-
-const router = useRouter()
-const title = computed(() => router.currentRoute.value.fullPath.slice(1))
-
-const isSidebarCollapsed = ref<boolean>(true)
+const { t, locale } = useI18n()
+const isSidebarCollapsed = ref(true)
+const currentLanguage = ref(locale.value)
 
 function handleToggleSidebar() {
   isSidebarCollapsed.value = !isSidebarCollapsed.value
 }
+
+const name = computed(() =>
+  currentLanguage.value === 'en'
+    ? 'twemoji:flag-for-flag-united-states'
+    : 'twemoji:flag-for-flag-brazil',
+)
 
 const sideBarClass = computed<'hidden' | 'block'>(() =>
   !!isSidebarCollapsed.value ? 'hidden' : 'block',
@@ -25,7 +29,9 @@ const sideBarClass = computed<'hidden' | 'block'>(() =>
   >
     <div class="w-full flex justify-between items-center p-2">
       <BusinessLabel :name class="p-1/5 flex-5" />
-      <span class="shrink-0 text-slate-400 text-sm font-bold">{{ title }}</span>
+      <span class="shrink-0 text-slate-400 text-sm font-bold">{{
+        'title'
+      }}</span>
       <MenuBtn :isSidebarCollapsed @toggleSidebar="handleToggleSidebar" />
     </div>
     <div
@@ -48,6 +54,66 @@ const sideBarClass = computed<'hidden' | 'block'>(() =>
           />
         </div>
       </div>
+    </div>
+    <button
+      @click="handleToggleSidebar"
+      variant="outline"
+      size="icon"
+      class="md:block hidden w-8 h-8 transition-transform duration-300 ease-in-out"
+      :class="{ 'rotate-180': isSidebarCollapsed }"
+    >
+      <Icon name="lucide:menu"></Icon>
+    </button>
+    <div class="md:hidden">
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <img
+            class="h-7 transition-opacity duration-300 ease-in-out"
+            src="/images/tcheplanner-elemento.png"
+            alt="Logo"
+          />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel class="flex flex-row items-center gap-3">
+            <span>Tcheplanner</span>
+            <!-- <LanguageSwitcher size="4" /> -->
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <div v-for="link in links" :key="link.to">
+            <DropdownMenuItem>
+              <RouterLink :to="link.to" class="flex items-center gap-2">
+                <Icon :name="link.icon"></Icon>
+                <span>{{ t(link.text) }}</span>
+              </RouterLink>
+            </DropdownMenuItem>
+          </div>
+          <DropdownMenuSeparator />
+          <!-- <div v-for="link in linksFooter" :key="link.to">
+            <DropdownMenuItem>
+              <RouterLink :to="link.to" class="flex items-center gap-2">
+                <Icon :name="link.icon"></Icon>
+                <span>{{ link.text }}</span>
+              </RouterLink>
+            </DropdownMenuItem>
+          </div> -->
+          <DropdownMenuItem>
+            <button @click="handleLogout" class="flex items-center gap-2">
+              <Icon name="lucide:log-out"></Icon>
+              <span>{{ t('auth.logout') }}</span>
+            </button>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+
+    <img
+      src="/images/logo-tcheplanner.png"
+      alt="Logo"
+      :class="['h-6 transition-opacity duration-300 ease-in-out']"
+    />
+    <div class="flex justify-center items-center gap-2">
+      <!-- <LanguageSwitcher /> -->
+      <UserSettings />
     </div>
   </nav>
   <div class="w-full flex flex-row justify-center">

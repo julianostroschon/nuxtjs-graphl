@@ -1,21 +1,41 @@
-<template>
-  <Icon @click="toggleLanguage" :name />
-</template>
-
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+// import { computed } from 'vue'
+
+interface Props {
+  size?: string
+}
 
 const { locale, setLocale } = useI18n()
-const currentLanguage = ref(locale.value)
-
-const name = computed(() =>
-  currentLanguage.value === 'en'
-    ? 'twemoji:flag-for-flag-united-states'
-    : 'twemoji:flag-for-flag-brazil',
-)
+const currentLocale = computed(() => locale.value)
+const props = withDefaults(defineProps<Props>(), {
+  size: '6',
+})
 
 async function toggleLanguage() {
-  currentLanguage.value = currentLanguage.value === 'en' ? 'pt-BR' : 'en'
-  setLocale(currentLanguage.value)
+  const newLocale = currentLocale.value === 'en' ? 'pt-BR' : 'en'
+  await setLocale(newLocale)
+  localStorage.setItem('userLocale', newLocale)
 }
+
+onMounted(() => {
+  const savedLocale = localStorage.getItem('userLocale')
+  if (savedLocale) {
+    setLocale(savedLocale)
+  }
+})
 </script>
+
+<template>
+  <div @click="toggleLanguage" class="flex items-center">
+    <Icon
+      :name="
+        currentLocale === 'en'
+          ? 'twemoji:flag-for-flag-united-states'
+          : 'twemoji:flag-for-flag-brazil'
+      "
+      class="m-0 p-0"
+      :class="`w-${props.size} h-${props.size}`"
+    />
+  </div>
+</template>

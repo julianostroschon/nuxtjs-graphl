@@ -1,4 +1,4 @@
-import { prisma } from './utils/prisma'
+import { getPrismaClient } from './utils/prisma'
 import { getRedisClient } from './utils/redis'
 
 export default defineEventHandler(async event => {
@@ -15,6 +15,8 @@ export default defineEventHandler(async event => {
 
   return sendRedirect(event, '/')
 })
+
+const isProduction = process.env.NODE_ENV === 'production'
 
 const handleRedisQuery = async (
   redisResult: [error: Error | null, result: unknown][],
@@ -35,6 +37,9 @@ const handleRedisQuery = async (
   ) {
     return
   }
+  const host = window.location.host
+  const subdomain = isProduction ? host.split('.')[0] : 'localhost'
+  const prisma = getPrismaClient(subdomain)
 
   await prisma.user.create({
     data: {

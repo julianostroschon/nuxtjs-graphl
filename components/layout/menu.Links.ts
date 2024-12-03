@@ -3,6 +3,7 @@ export const links = [
   { to: '/projects', icon: 'lucide:building-2', text: 'sidebar.projects' },
   { to: '/tasks', icon: 'lucide:badge-check', text: 'sidebar.tasks' },
   { to: '/products', icon: 'lucide:package', text: 'sidebar.products' },
+  { to: '/users', icon: 'lucide:user', text: 'sidebar.user' },
 ]
 
 export const linksFooter = [

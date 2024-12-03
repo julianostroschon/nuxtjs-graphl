@@ -1,9 +1,5 @@
-import { useAuthStore } from '@/stores/authStore'
-
 export default defineNuxtRouteMiddleware(to => {
-  const authStore = useAuthStore()
-  const token = useCookie('authToken').value
-  const user = useCookie('authUser').value
+  const sid = useCookie('sid').value
 
   // Define public routes
   // const publicRoutes = ['/login', '/register']
@@ -14,18 +10,7 @@ export default defineNuxtRouteMiddleware(to => {
   // }
 
   // Redirect to login if no token is found
-  // if (!token) {
-  //   return navigateTo('/login')
-  // }
-
-  // Persist authStore state from cookies
-  if (token && !authStore.token) {
-    authStore.setToken(token)
-    try {
-      authStore.setUser(user ? JSON.parse(user) : {})
-    } catch (e) {
-      console.error('Failed to parse authUser cookie:', e)
-      authStore.setUser({ username: '' })
-    }
+  if (!sid) {
+    return navigateTo('/login')
   }
 })

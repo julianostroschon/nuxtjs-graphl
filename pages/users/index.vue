@@ -4,12 +4,19 @@ export default defineComponent({
 
   async setup() {
     const data = await GqlGetUsers()
+    const users = computed(() => {
+      const result = data?.getUsers
+      if (result && result.nodes) {
+        return result.nodes
+      }
+      return []
+    })
     definePageMeta({
       layout: 'default',
     })
     return {
       name: 'UserIndex',
-      data,
+      users,
     }
   },
 })
@@ -19,19 +26,15 @@ export default defineComponent({
   <div>
     <h1>{{ name }}</h1>
     <div class="card rounded bg-slate-100 shadow-md w-full">
-      {{ data.getUsers }}
       <div
         id="products"
-        v-for="user in data.getUsers"
-        :key="user.id"
+        v-for="{ id, username } in users"
+        :key="id"
         class="w-full flex flex-col items-center justify-center p-4"
       >
-        oito
         <div class="card rounded bg-slate-500 shadow-md w-full p-4">
           <div class="card-body">
-            <h2 class="card-title text-center">
-              {{ user.name }}
-            </h2>
+            <h2 class="card-title text-center">{{ id }} {{ username }}</h2>
           </div>
         </div>
       </div>

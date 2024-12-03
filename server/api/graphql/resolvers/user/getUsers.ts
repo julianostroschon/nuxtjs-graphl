@@ -13,7 +13,6 @@ export const getUsers: FieldResolver<'Query', 'getUsers'> = async (
     ...(username && { username: { contains: username } }),
     ...(email && { email: { contains: email } }),
   }
-  console.log({ prisma })
 
   const users = await prisma.user.findMany({
     where,

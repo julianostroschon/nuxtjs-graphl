@@ -5,6 +5,7 @@ const { data } = await useAsyncGql('Ping')
 
 definePageMeta({
   layout: 'default',
+  title: 'Home',
 })
 </script>
 

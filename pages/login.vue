@@ -6,6 +6,7 @@ import * as z from 'zod'
 
 definePageMeta({
   layout: 'login',
+  title: 'Login',
 })
 const { t } = useI18n()
 const errorMessage = ref('')

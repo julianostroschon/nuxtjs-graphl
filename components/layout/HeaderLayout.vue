@@ -3,6 +3,7 @@ import { name } from '@/utils/constants'
 import { FooterPage } from '@/components/ui/footer'
 import { useLogout } from './logout'
 import { links } from './menu.Links'
+
 const { handleLogout } = useLogout()
 const { t } = useI18n()
 const isSidebarCollapsed = ref(true)
@@ -40,23 +41,15 @@ function handleToggleSidebar() {
             <!-- <LanguageSwitcher size="4" /> -->
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <div v-for="link in links" :key="link.to">
+          <div v-for="{ to, icon, text } in links" :key="to">
             <DropdownMenuItem>
-              <RouterLink :to="link.to" class="flex items-center gap-2">
-                <Icon :name="link.icon"></Icon>
-                <span>{{ t(link.text) }}</span>
+              <RouterLink :to class="flex items-center gap-2">
+                <Icon :name="icon"></Icon>
+                <span>{{ t(text) }}</span>
               </RouterLink>
             </DropdownMenuItem>
           </div>
           <DropdownMenuSeparator />
-          <!-- <div v-for="link in linksFooter" :key="link.to">
-            <DropdownMenuItem>
-              <RouterLink :to="link.to" class="flex items-center gap-2">
-                <Icon :name="link.icon"></Icon>
-                <span>{{ link.text }}</span>
-              </RouterLink>
-            </DropdownMenuItem>
-          </div> -->
           <DropdownMenuItem>
             <button @click="handleLogout" class="flex items-center gap-2">
               <Icon name="lucide:log-out"></Icon>

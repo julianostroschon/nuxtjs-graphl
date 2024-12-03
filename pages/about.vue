@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  title: 'about',
+})
+</script>
 
 <template>
   <div>

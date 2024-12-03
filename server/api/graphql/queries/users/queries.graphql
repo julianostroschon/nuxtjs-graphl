@@ -1,0 +1,17 @@
+query GetUser($id: Int) {
+  getUser(id: $id) {
+    id
+    username
+    email
+  }
+}
+
+query GetUsers {
+  getUsers {
+    nodes {
+      id
+      username
+      email
+    }
+  }
+}

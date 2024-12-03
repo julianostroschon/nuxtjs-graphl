@@ -1,30 +1,27 @@
 <script setup lang="ts">
-const isCollapsed = ref(false)
+const isSidebarCollapsed = ref(false)
 
 function handleCollapseUpdate(value: boolean) {
-  isCollapsed.value = value
+  isSidebarCollapsed.value = value
 }
 
 function handleToggleSidebar() {
-  isCollapsed.value = !isCollapsed.value
+  isSidebarCollapsed.value = !isSidebarCollapsed.value
 }
 </script>
 
 <template>
   <Sidebar
-    :isSidebarCollapsed="isCollapsed"
-    @update:isCollapsed="handleCollapseUpdate"
+    :isSidebarCollapsed="isSidebarCollapsed"
+    @update:isSidebarCollapsed="handleCollapseUpdate"
   />
   <div
     :class="[
       'flex flex-col transition-[margin] duration-300 ease-in-out',
-      isCollapsed ? 'ml-16' : 'md:ml-48',
+      isSidebarCollapsed ? 'ml-16' : 'md:ml-48',
     ]"
   >
-    <HeaderLayout
-      :isSidebarCollapsed="isCollapsed"
-      @toggleSidebar="handleToggleSidebar"
-    />
+    <HeaderLayout :isSidebarCollapsed @toggleSidebar="handleToggleSidebar" />
     <main class="pt-2 pl-4">
       <slot />
     </main>

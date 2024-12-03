@@ -1,68 +1,29 @@
 <script setup lang="ts">
-import { MenuList } from '@/components/ui/menu'
+import { name } from '@/utils/constants'
 import { FooterPage } from '@/components/ui/footer'
 import { useLogout } from './logout'
 import { links } from './menu.Links'
 const { handleLogout } = useLogout()
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const isSidebarCollapsed = ref(true)
-const currentLanguage = ref(locale.value)
 
 function handleToggleSidebar() {
   isSidebarCollapsed.value = !isSidebarCollapsed.value
 }
-
-const name = computed(() =>
-  currentLanguage.value === 'en'
-    ? 'twemoji:flag-for-flag-united-states'
-    : 'twemoji:flag-for-flag-brazil',
-)
-
-const sideBarClass = computed<'hidden' | 'block'>(() =>
-  !!isSidebarCollapsed.value ? 'hidden' : 'block',
-)
 </script>
 
 <template>
   <nav
-    class="flex-col justify-start items-center gaps-4 bg-muted/40 border-b-2"
+    class="flex justify-between items-center p-4 bg-muted/40 border-b-2 w-full bg-slate-200"
   >
-    <div class="w-full flex justify-between items-center p-2">
-      <BusinessLabel :name class="p-1/5 flex-5" />
-      <span class="shrink-0 text-slate-400 text-sm font-bold">{{
-        'title'
-      }}</span>
-      <MenuBtn :isSidebarCollapsed @toggleSidebar="handleToggleSidebar" />
-    </div>
-    <div
-      class="flex justify-between items-center px-5 py-2 relative bg-slate-200 shadow-md shadow-inner shadow-top"
-      :class="sideBarClass"
-    >
-      <div class="flex flex-col">
-        <MenuList class="" :links />
-      </div>
-      <div
-        class="flex flex-col items-center shadow-md p-3 w-50 content bg-white rounded-md"
-      >
-        <Icon name="lucide:user" class="w-6 h-6 pb-10 text-slate-400" />
-        <div class="flex flex-row gap-5">
-          <LanguageSwitcher class="w-3 p-3" />
-          <LogoutBtn
-            @click="handleLogout"
-            text-class="text-sm font-semibold"
-            class="text-red-500 dark:text-red-100"
-          />
-        </div>
-      </div>
-    </div>
     <button
       @click="handleToggleSidebar"
       variant="outline"
       size="icon"
-      class="md:block hidden w-8 h-8 transition-transform duration-300 ease-in-out"
+      class="md:block hidden w-9 h-9 transition-transform duration-300 ease-in-out"
       :class="{ 'rotate-180': isSidebarCollapsed }"
     >
-      <Icon name="lucide:menu"></Icon>
+      <Icon name="lucide:menu" />
     </button>
     <div class="md:hidden">
       <DropdownMenu>
@@ -75,7 +36,7 @@ const sideBarClass = computed<'hidden' | 'block'>(() =>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel class="flex flex-row items-center gap-3">
-            <span>Tcheplanner</span>
+            <span>{{ name.toUpperCase() }}</span>
             <!-- <LanguageSwitcher size="4" /> -->
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
@@ -112,11 +73,11 @@ const sideBarClass = computed<'hidden' | 'block'>(() =>
       :class="['h-6 transition-opacity duration-300 ease-in-out']"
     />
     <div class="flex justify-center items-center gap-2">
-      <!-- <LanguageSwitcher /> -->
+      <LanguageSwitcher />
       <UserSettings />
     </div>
   </nav>
-  <div class="w-full flex flex-row justify-center">
+  <div class="w-full flex flex-row justify-center bg-slate-900">
     <slot />
   </div>
   <FooterPage />

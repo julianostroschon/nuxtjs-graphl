@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    <h1>Usuários</h1>
+    <h1>{{ $t('sidebar.tasks') }}</h1>
   </div>
 </template>

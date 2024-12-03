@@ -5,5 +5,5 @@ export const PageArgs = inputObjectType({
   definition: t => {
     t.nonNull.int('skip')
     t.nonNull.int('take')
-  }
+  },
 })

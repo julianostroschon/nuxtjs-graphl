@@ -39,9 +39,10 @@
     "unknown": "Erro desconhecido, tente novamnete"
   },
   "sidebar": {
-    "dashboard": "Dashboard",
+    "dashboard": "Painel",
     "projects": "Projetos",
     "tasks": "Tarefas",
+    "products": "Produtos",
     "user": "Usuários"
   },
   "user": {

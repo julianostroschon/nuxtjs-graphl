@@ -1,11 +1,11 @@
-import type { FieldResolver } from "nexus";
+import type { FieldResolver } from 'nexus'
 
-import { getUserByID } from "../../../domains/users/getUserById";
+import { getUserByID } from '../../../domains/users/getUserById'
 
-export const getUser: FieldResolver<"Query", "getUser"> = async (
+export const getUser: FieldResolver<'Query', 'getUser'> = async (
   _,
   { id },
-  { prisma }
+  { prisma },
 ) => {
-  return await getUserByID(prisma, id);
-};
+  return await getUserByID(prisma, id)
+}

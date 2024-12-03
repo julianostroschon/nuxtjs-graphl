@@ -12,12 +12,12 @@ if (!process.env.SERVER_URL) {
 
 const server = process.env.SERVER_URL || 'http://localhost:3000'
 export const generateVerificationEmail = (
-  credentials: EmailInput
+  credentials: EmailInput,
 ): Mail.Options => ({
   from: 'Test App <test-noreply@app.com>',
   to: credentials.email,
   subject: `Welcome to TestApp, ${credentials.username}!`,
   html: `<h1>Verify your account!</h1>\
             <p>Please click the link below to verify your account</p>\
-            <a href="${server}/api/confirm_account?id=${credentials.uuid}" target="_blank">Register Account</a>`
+            <a href="${server}/api/confirm_account?id=${credentials.uuid}" target="_blank">Register Account</a>`,
 })

@@ -22,11 +22,27 @@ type Pagination {
   totalCount: Int!
 }
 
+input ProductArgs {
+  id: Int
+}
+
+type ProductList {
+  nodes: [ProductResponse!]
+}
+
+type ProductResponse {
+  id: Int!
+  name: String!
+  price: String
+}
+
 type Query {
   getUser(id: Int): UserResponse
   getUsers(pageArgs: PageArgs, userArgs: UserArgs): UserList
   implicitLogin: implicitLoginResponse
   ping: String
+  productGet(id: Int): ProductResponse
+  productLoad: [ProductResponse!]
 }
 
 input UserArgs {

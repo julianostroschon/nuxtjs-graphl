@@ -1,6 +1,11 @@
 <script setup lang="ts" generic="T extends z.ZodAny">
 import type { Config, ConfigItem } from './interface'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { FormItem, FormMessage } from '@/components/ui/form'
 import { Separator } from '@/components/ui/separator'
@@ -33,14 +38,13 @@ function isZodDefault(
 }
 
 const itemShape = computed(() => {
-  if (!props.schema)
-    return
+  if (!props.schema) return
 
   const schema: z.ZodAny = isZodArray(props.schema)
     ? props.schema._def.type
     : isZodDefault(props.schema)
-    // @ts-expect-error missing schema
-      ? props.schema._def.innerType._def.type
+      ? // @ts-expect-error missing schema
+        props.schema._def.innerType._def.type
       : null
 
   return {
@@ -57,7 +61,13 @@ provide(FieldContextKey, fieldContext)
 <template>
   <FieldArray v-slot="{ fields, remove, push }" as="section" :name="fieldName">
     <slot v-bind="props">
-      <Accordion type="multiple" class="w-full" collapsible :disabled="disabled" as-child>
+      <Accordion
+        type="multiple"
+        class="w-full"
+        collapsible
+        :disabled="disabled"
+        as-child
+      >
         <FormItem>
           <AccordionItem :value="fieldName" class="border-none">
             <AccordionTrigger>

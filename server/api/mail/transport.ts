@@ -19,8 +19,8 @@ export const getTransport = async () => {
     secure: process.env.NODE_ENV === 'production',
     auth: {
       user,
-      pass
-    }
+      pass,
+    },
   })
   return transport
 }

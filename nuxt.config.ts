@@ -2,6 +2,17 @@
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+  colorMode: {
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if not system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '-mode',
+    storage: 'localStorage', // or 'sessionStorage' or 'cookie'
+    storageKey: 'nuxt-color-mode',
+  },
   devtools: {
     enabled: true,
 
@@ -11,13 +22,13 @@ export default defineNuxtConfig({
   },
   modules: [
     'nuxt-graphql-server',
-    'nuxt-graphql-client',
-    // '@nuxtjs/eslint-module',
+    'nuxt-graphql-client', // '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
     '@nuxtjs/i18n',
     '@nuxt/icon',
     '@pinia/nuxt',
+    '@nuxtjs/color-mode',
   ],
   components: [
     {
@@ -88,4 +99,15 @@ export default defineNuxtConfig({
   experimental: {
     asyncContext: true,
   },
+  // colorMode: {
+  //   preference: 'system', // default value of $colorMode.preference
+  //   fallback: 'light', // fallback value if not system preference found
+  //   hid: 'nuxt-color-mode-script',
+  //   globalName: '__NUXT_COLOR_MODE__',
+  //   componentName: 'ColorScheme',
+  //   classPrefix: '',
+  //   classSuffix: '-mode',
+  //   storage: 'localStorage', // or 'sessionStorage' or 'cookie'
+  //   storageKey: 'nuxt-color-mode',
+  // },
 })

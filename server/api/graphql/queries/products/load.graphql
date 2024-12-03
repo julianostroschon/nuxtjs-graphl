@@ -1,0 +1,7 @@
+query ProductLoad {
+  products: productLoad {
+    id
+    name
+    price
+  }
+}

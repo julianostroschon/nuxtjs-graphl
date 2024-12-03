@@ -18,6 +18,8 @@ const AuthPlugin = plugin({
           ? (extensions as { publicOperations?: boolean }).publicOperations
           : false
 
+      console.log({ isPublic, ctx })
+
       if (!isPublic && !ctx.username) {
         throw new GraphQLError('Unauthorized')
       }

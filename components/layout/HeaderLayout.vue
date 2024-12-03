@@ -1,29 +1,29 @@
 <script setup lang="ts">
+import { name } from '@/utils/constants'
+import { FooterPage } from '@/components/ui/footer'
 import { useLogout } from './logout'
 import { links } from './menu.Links'
-const emits = defineEmits(['toggleSidebar'])
-const props = defineProps<{
-  isSidebarCollapsed: boolean
-}>()
 const { handleLogout } = useLogout()
 const { t } = useI18n()
+const isSidebarCollapsed = ref(true)
+
 function handleToggleSidebar() {
-  emits('toggleSidebar')
+  isSidebarCollapsed.value = !isSidebarCollapsed.value
 }
 </script>
 
 <template>
   <nav
-    class="flex justify-between items-center gap-2 bg-muted/40 px-4 border-b h-16"
+    class="flex justify-between items-center p-4 bg-muted/40 border-b-2 w-full bg-slate-200"
   >
     <button
       @click="handleToggleSidebar"
       variant="outline"
       size="icon"
-      class="md:block hidden w-8 h-8 transition-transform duration-300 ease-in-out"
-      :class="{ 'rotate-180': props.isSidebarCollapsed }"
+      class="md:block hidden w-9 h-9 transition-transform duration-300 ease-in-out"
+      :class="{ 'rotate-180': isSidebarCollapsed }"
     >
-      <Icon name="lucide:menu"></Icon>
+      <Icon name="lucide:menu" />
     </button>
     <div class="md:hidden">
       <DropdownMenu>
@@ -36,7 +36,7 @@ function handleToggleSidebar() {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel class="flex flex-row items-center gap-3">
-            <span>Tcheplanner</span>
+            <span>{{ name.toUpperCase() }}</span>
             <!-- <LanguageSwitcher size="4" /> -->
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
@@ -73,8 +73,12 @@ function handleToggleSidebar() {
       :class="['h-6 transition-opacity duration-300 ease-in-out']"
     />
     <div class="flex justify-center items-center gap-2">
-      <!-- <LanguageSwitcher /> -->
+      <LanguageSwitcher />
       <UserSettings />
     </div>
   </nav>
+  <div class="w-full flex flex-row justify-center bg-slate-900">
+    <slot />
+  </div>
+  <FooterPage />
 </template>

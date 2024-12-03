@@ -1,5 +1,5 @@
-import type jwt from "jsonwebtoken";
+import type jwt from 'jsonwebtoken'
 
 export type DecodedJWT = jwt.JwtPayload & {
-  username: string;
-};
+  username: string
+}

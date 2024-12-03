@@ -91,7 +91,7 @@ const onSubmit = handleSubmit(async values => {
           {{ t('auth.footer') }}
         </div>
         <Separator />
-        <!-- <LanguageSwitcher /> -->
+        <LanguageSwitcher />
       </CardFooter>
     </Card>
   </div>

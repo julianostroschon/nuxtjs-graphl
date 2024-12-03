@@ -18,5 +18,5 @@ export const DateScalar = scalarType({
       return new Date(ast.value) // ast value is always in string format
     }
     return null
-  }
+  },
 })

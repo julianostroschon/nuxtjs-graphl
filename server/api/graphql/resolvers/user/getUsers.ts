@@ -13,6 +13,7 @@ export const getUsers: FieldResolver<'Query', 'getUsers'> = async (
     ...(username && { username: { contains: username } }),
     ...(email && { email: { contains: email } }),
   }
+  console.log({ prisma })
 
   const users = await prisma.user.findMany({
     where,
@@ -22,11 +23,8 @@ export const getUsers: FieldResolver<'Query', 'getUsers'> = async (
       id: true,
       username: true,
       email: true,
-      created_at: true,
     },
   })
-
-  // const totalCount = await prisma.user.count({ where });
 
   return {
     nodes: users.map(
@@ -34,12 +32,12 @@ export const getUsers: FieldResolver<'Query', 'getUsers'> = async (
         id: number
         username: string
         email: string
-        created_at: Date
+        // created_at: Date
       }) => ({
         id: user.id,
         username: user.username,
         email: user.email,
-        createdAt: user.created_at,
+        // createdAt: user.created_at,
       }),
     ),
   }

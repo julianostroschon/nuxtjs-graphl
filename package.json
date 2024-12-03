@@ -1,5 +1,6 @@
 {
-  "name": "nuxt-app",
+  "name": "tcheplanner",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,19 +11,27 @@
     "postinstall": "nuxt prepare",
     "gql:gen": "node ./generate-schema.cjs",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/",
-    "migrate": "bash ./scripts/migrate.sh"
+    "format": "prettier --write .",
+    "migrate": "prisma migrate dev",
+    "seed": "npx prisma db seed",
+    "migrate:sh": "bash ./scripts/migrate.sh"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed/seed.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
     "@as-integrations/h3": "^1.2.1",
     "@nuxt/icon": "^1.6.1",
     "@nuxt/types": "^2.18.1",
+    "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/i18n": "^8.5.5",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@pinia/nuxt": "^0.6.1",
     "@prisma/client": "5.21.1",
     "@radix-icons/vue": "^1.0.0",
+    "@snaplet/seed": "^0.98.0",
+    "amqplib": "^0.10.4",
     "@tanstack/vue-table": "^8.20.5",
     "@vee-validate/zod": "^4.14.6",
     "@vueuse/core": "^11.2.0",
@@ -63,6 +72,8 @@
     "@iconify-json/lucide": "^1.2.11",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@rollup/plugin-yaml": "^4.1.2",
+    "@snaplet/copycat": "^5.1.0",
+    "@types/amqplib": "^0.10.5",
     "@types/bcrypt": "^5.0.2",
     "@types/ioredis": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",
@@ -85,5 +96,6 @@
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "vitest": "^2.1.4"
-  }
+  },
+  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387"
 }

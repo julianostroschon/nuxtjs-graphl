@@ -10,7 +10,7 @@ definePageMeta({
 
 <template>
   <div class="outline-4 outline-black hover:border-b-2">Template</div>
-  <div>{{ data.ping }}</div>
+  <div>{{ data?.ping }}</div>
   <div class="p-4">
     <Button class="rounded-lg" :to="`user`">Click me</Button>
   </div>

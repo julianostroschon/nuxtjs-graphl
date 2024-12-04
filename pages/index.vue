@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// useGqlCors({ credentials: 'same-origin' })
+useGqlCors({ credentials: 'same-origin' })
 import { Button } from '@/components/ui/button'
 const { data } = await useAsyncGql('Ping')
 

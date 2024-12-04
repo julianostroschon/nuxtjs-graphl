@@ -33,10 +33,10 @@
     "@prisma/client": "5.21.1",
     "@radix-icons/vue": "^1.0.0",
     "@snaplet/seed": "^0.98.0",
-    "amqplib": "^0.10.4",
     "@tanstack/vue-table": "^8.20.5",
     "@vee-validate/zod": "^4.14.6",
     "@vueuse/core": "^11.2.0",
+    "amqplib": "^0.10.4",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "graphql": "^16.9.0",
@@ -70,6 +70,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@iconify-json/twemoji": "^1.2.1",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@rollup/plugin-yaml": "^4.1.2",
     "@snaplet/copycat": "^5.1.0",

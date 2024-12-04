@@ -153,6 +153,9 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
+      '@iconify-json/twemoji':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@nuxtjs/eslint-module':
         specifier: ^4.1.0
         version: 4.1.0(eslint@9.13.0(jiti@2.3.3))(magicast@0.3.5)(rollup@4.24.3)(vite@5.4.10(@types/node@22.10.1)(terser@5.36.0))(webpack-sources@3.2.3)(webpack@5.95.0)
@@ -1456,6 +1459,9 @@ packages:
 
   '@iconify-json/lucide@1.2.17':
     resolution: {integrity: sha512-y+4P1DxD2h4d4fGYxikUdMf0o21DD0GIE/YIgixEBIXKbE90LTOFqmoxkGyPpaGk3vT2qE2w/28+sdmBMFsd5w==}
+
+  '@iconify-json/twemoji@1.2.1':
+    resolution: {integrity: sha512-BwYutpZMsBfo9YXXLCosyQXT9qU5xT+FBOqw2Ivks0bL7zZNiQGP/bONoQTZVvmOcEJrndfcvZGfKTDC92klfQ==}
 
   '@iconify/collections@1.0.476':
     resolution: {integrity: sha512-CHErIMzMRq1zWnGsSeWFu3o1fwIRg/dLQwSVlmmUFr8k7pJEsD5HFQyW79u1YcEjUWa1m50/qzz0SCcAZUK6Tw==}
@@ -8383,6 +8389,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/lucide@1.2.17':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/twemoji@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
 

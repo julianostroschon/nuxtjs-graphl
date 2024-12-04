@@ -22,6 +22,8 @@
   "dependencies": {
     "@apollo/server": "^4.11.2",
     "@as-integrations/h3": "^1.2.1",
+    "@iconify-json/flag": "^1.2.2",
+    "@iconify-json/lucide": "^1.2.11",
     "@nuxt/icon": "^1.6.1",
     "@nuxt/types": "^2.18.1",
     "@nuxtjs/color-mode": "^3.5.2",
@@ -68,8 +70,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@iconify-json/flag": "^1.2.2",
-    "@iconify-json/lucide": "^1.2.11",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@rollup/plugin-yaml": "^4.1.2",
     "@snaplet/copycat": "^5.1.0",

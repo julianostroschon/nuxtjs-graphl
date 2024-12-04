@@ -46,6 +46,14 @@ export default defineNuxtConfig({
     schema: 'generated/schema.graphql',
     url: '/api/graphql',
   },
+  ssr: true,
+  nitro: {
+    // baseURL: 'http://localhost:8000',
+    prerender: {
+      crawlLinks: true,
+      failOnError: false,
+    },
+  },
   imports: {
     dirs: ['composables/**'],
 

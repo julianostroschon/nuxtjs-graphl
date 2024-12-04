@@ -7,8 +7,9 @@ export default defineComponent({
   async setup() {
     const users = ref<UserResponse[]>([])
     onMounted(async () => {
-      const data = await GqlGetUsers()
-      const result = data?.getUsers
+      const { data } = await useAsyncGql('GetUsers')
+      console.log({ data })
+      const result = data?.value.getUsers
       if (result && result.nodes) {
         users.value = result.nodes
       }

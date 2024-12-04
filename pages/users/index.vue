@@ -17,7 +17,8 @@ export default defineComponent({
   <div>
     <h1>{{ name }}</h1>
     <div class="card rounded bg-slate-100 shadow-md w-full">
-      <UsersLoad />
+      <!-- <UsersLoad /> -->
+      oito
     </div>
   </div>
 </template>

@@ -2,8 +2,8 @@
 import { name, version } from '@/utils/constants'
 </script>
 <template>
-  <footer class="absolute bottom-0 left-0 w-full bg-slate-900 text-slate-100">
-    <div class="flex flex-row justify-between items-center p-2">
+  <footer class="absolute bottom-0 bg-slate-500 text-slate-100">
+    <div class="flex flex-grow justify-between items-center p-2">
       <div class="flex flex-row gap-2">
         <img
           class="h-7 transition-opacity duration-300 ease-in-out"
@@ -19,7 +19,6 @@ import { name, version } from '@/utils/constants'
         class="text-sm font-bold text-xs text-slate-400 pt-1 outline-4 outline-black"
         >v{{ version }}</span
       >
-      <!-- </div> -->
     </div>
   </footer>
 </template>

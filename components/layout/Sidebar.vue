@@ -20,7 +20,7 @@ watch(
 <template>
   <aside
     :class="[
-      'fixed flex flex-col bg-muted/40 border-r h-screen transition-all',
+      'fixed flex flex-col border-r h-screen transition-all',
       'duration-300 ease-in-out hidden md:flex',
       isCollapsed ? 'w-16' : 'w-16 md:w-48',
     ]"
@@ -34,7 +34,7 @@ watch(
         alt="Logo"
       />
       <img
-        v-if="!isCollapsed"
+        v-else
         src="/images/logo-tcheplanner.png"
         alt="Logo"
         class="md:block hidden h-6 transition-opacity duration-300 ease-in-out"
@@ -43,7 +43,7 @@ watch(
     </div>
     <nav class="flex flex-col gap-4 h-[calc(100%-4rem)] overflow-y-auto">
       <div class="flex-grow">
-        <SidebarLinks :links="links" :isCollapsed="isCollapsed" />
+        <SidebarLinks :links :isCollapsed />
       </div>
       <div
         @click="handleLogout"

@@ -3,6 +3,16 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import DataTableDropDown from './DataTableDropDown.vue'
 // import type { Payment } from './data-table.vue'
+import { useI18n } from 'vue-i18n'
+defineComponent({
+  name: 'DataTableDropDown',
+  setup() {
+    const { t } = useI18n()
+    t('sidebar.about')
+    return () => h(DataTableDropDown)
+  },
+})
+// const { t } = useI18n()
 export interface Payment {
   id: string
   amount: number
@@ -48,7 +58,7 @@ export const columns: ColumnDef<Payment>[] = [
         checked: table.getIsAllPageRowsSelected(),
         'onUpdate:checked': (value: boolean) =>
           table.toggleAllPageRowsSelected(!!value),
-        ariaLabel: 'Select all',
+        // ariaLabel: t('sidebar.about'),
       }),
     cell: ({ row }) =>
       h(Checkbox, {
@@ -103,8 +113,7 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: 'status',
     header: () => h('div', { class: '' }, 'Status'),
     cell: ({ row }) => {
-      console.log({ row })
-      const value = row.getValue('status')
+      const value = row.getValue<Payment['status']>('status')
       // const formatted = new Intl.NumberFormat('en-US', {
       //   style: 'currency',
       //   currency: 'USD',

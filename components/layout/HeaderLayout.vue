@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { name } from '@/utils/constants'
-import { FooterPage } from '@/components/ui/footer'
 import { useLogout } from './logout'
 import { links } from './menu.Links'
+const emits = defineEmits(['toggleSidebar'])
 
 const { handleLogout } = useLogout()
 const { t } = useI18n()
 const isSidebarCollapsed = ref(true)
 
 function handleToggleSidebar() {
+  emits('toggleSidebar')
   isSidebarCollapsed.value = !isSidebarCollapsed.value
 }
 </script>
@@ -73,5 +74,4 @@ function handleToggleSidebar() {
   <div class="w-full flex flex-row justify-center bg-slate-900">
     <slot />
   </div>
-  <FooterPage />
 </template>

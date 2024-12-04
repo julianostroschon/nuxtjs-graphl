@@ -1,28 +1,36 @@
 <script lang="ts">
+import { columns, payments } from '~/components/ui/table/SimpleTable/columns'
+import DataTable from '~/components/ui/table/SimpleTable/data-table.vue'
+
+// import { SimpleTable } from '~/components/ui/table'
 interface UserResponse {
   id: number
   username: string
 }
 export default defineComponent({
+  components: { DataTable },
   async setup() {
     const users = ref<UserResponse[]>([])
     onMounted(async () => {
-      const { data } = await useAsyncGql('GetUsers')
-      console.log({ data })
-      const result = data?.value.getUsers
+      const data = await GqlGetUsers()
+      const result = data?.getUsers
       if (result && result.nodes) {
         users.value = result.nodes
+        return
       }
       users.value = []
     })
     return {
       users,
+      columns,
+      payments,
     }
   },
 })
 </script>
 <template>
   <div class="card rounded bg-slate-100 shadow-md w-full">
+    {{ users }}
     <div
       id="products"
       v-for="{ id, username } in users"
@@ -35,5 +43,7 @@ export default defineComponent({
         </div>
       </div>
     </div>
+    <DataTable :columns="columns" :data="payments" />
+    {{ columns }}
   </div>
 </template>

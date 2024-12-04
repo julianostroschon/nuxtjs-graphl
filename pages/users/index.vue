@@ -1,4 +1,6 @@
 <script lang="ts">
+import { columns, payments } from '~/components/ui/table/SimpleTable/columns'
+
 export default defineComponent({
   name: 'UserIndex',
 
@@ -18,6 +20,7 @@ export default defineComponent({
     <h1>{{ name }}</h1>
     <div class="card rounded bg-slate-100 shadow-md w-full">
       <UsersLoad />
+      <DataTable :columns="columns" :data="payments" />
     </div>
   </div>
 </template>

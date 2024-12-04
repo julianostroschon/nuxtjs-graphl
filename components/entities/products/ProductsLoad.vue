@@ -10,7 +10,7 @@ console.log({ data, products })
       id="products"
       v-for="{ id, name, price, stock } in products"
       :key="id"
-      class="w-full flex flex-col items-center justify-center p-4"
+      class="w-1/3 flex items-center justify-center p-4"
     >
       <div class="card rounded bg-slate-500 shadow-md w-full p-4">
         <div class="card-body">
@@ -25,6 +25,4 @@ console.log({ data, products })
       </div>
     </div>
   </div>
-  <div v-else>Error: {{ error }}</div>
-  oito
 </template>

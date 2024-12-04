@@ -17,7 +17,7 @@ const { handleLogout } = useLogout()
     <DropdownMenuContent>
       <DropdownMenuLabel>{{ t('common.config') }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuItem class="flex items-center">
+      <DropdownMenuItem class="flex items-center" @click="handleLogout">
         <RouterLink to="/user/config" class="flex items-center gap-2">
           <Icon name="lucide:user-round-cog"></Icon>
           <span>{{ t('user.config') }}</span>

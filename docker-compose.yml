@@ -21,7 +21,7 @@ services:
       RABBITMQ_DEFAULT_USER: ${RABBIT_USER:-user}
       RABBITMQ_DEFAULT_PASS: ${RABBIT_PASSWORD:-password}
     ports:
-      - '${RABBIT_PORT:-5672}:5672' # Porta padrão do RabbitMQ
-      - '${RABBIT_WEB_PORT:-15672}:15672' # Porta da interface de gerenciamento web
+      - '${RABBIT_PORT:-5671}:5672' # Porta padrão do RabbitMQ
+      - '${RABBIT_WEB_PORT:-15671}:15672' # Porta da interface de gerenciamento web
 volumes:
   pgdata:

@@ -47,7 +47,9 @@ export const ProductResponse = objectType({
   definition: t => {
     t.nonNull.int('id')
     t.nonNull.string('name')
-    t.string('price')
+    t.float('price')
+    t.int('stock')
+    t.date('createdAt')
     // t.nonNull.field('createdAt', { type: DateScalar })
   },
 })

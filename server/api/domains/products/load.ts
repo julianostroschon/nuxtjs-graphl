@@ -1,16 +1,16 @@
 import { PrismaClient } from '@prisma/client'
 
 export const getProducts = async (prisma: PrismaClient) => {
-  console.log({ o: 'o' })
   const products = await prisma.product.findMany({
     select: {
       id: true,
       name: true,
-      // price: true,
+      price: true,
+      description: true,
+      stock: true,
+      createdAt: true,
     },
   })
 
-  console.log({ products })
-
-  return products
+  return products ?? []
 }

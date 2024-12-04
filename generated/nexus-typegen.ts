@@ -76,9 +76,11 @@ export interface NexusGenObjects {
     nodes?: NexusGenRootTypes['ProductResponse'][] | null; // [ProductResponse!]
   }
   ProductResponse: { // root type
+    createdAt?: NexusGenScalars['Date'] | null; // Date
     id: number; // Int!
     name: string; // String!
-    price?: string | null; // String
+    price?: number | null; // Float
+    stock?: number | null; // Int
   }
   Query: {};
   UserList: { // root type
@@ -133,9 +135,11 @@ export interface NexusGenFieldTypes {
     nodes: NexusGenRootTypes['ProductResponse'][] | null; // [ProductResponse!]
   }
   ProductResponse: { // field return type
+    createdAt: NexusGenScalars['Date'] | null; // Date
     id: number; // Int!
     name: string; // String!
-    price: string | null; // String
+    price: number | null; // Float
+    stock: number | null; // Int
   }
   Query: { // field return type
     getUser: NexusGenRootTypes['UserResponse'] | null; // UserResponse
@@ -187,9 +191,11 @@ export interface NexusGenFieldTypeNames {
     nodes: 'ProductResponse'
   }
   ProductResponse: { // field return type name
+    createdAt: 'Date'
     id: 'Int'
     name: 'String'
-    price: 'String'
+    price: 'Float'
+    stock: 'Int'
   }
   Query: { // field return type name
     getUser: 'UserResponse'

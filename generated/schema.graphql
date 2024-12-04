@@ -31,9 +31,11 @@ type ProductList {
 }
 
 type ProductResponse {
+  createdAt: Date
   id: Int!
   name: String!
-  price: String
+  price: Float
+  stock: Int
 }
 
 type Query {

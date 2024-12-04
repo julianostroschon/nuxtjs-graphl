@@ -46,12 +46,20 @@ export default defineNuxtConfig({
     schema: 'generated/schema.graphql',
     url: '/api/graphql',
   },
-  ssr: true,
+  // ssr: true,
   nitro: {
     // baseURL: 'http://localhost:8000',
     prerender: {
       crawlLinks: true,
       failOnError: false,
+    },
+    hooks: {
+      // 'prerender:generate'(route) {
+      //   // console.log(route)
+      //   if (route.route?.includes('products')) {
+      //     route.skip = true
+      //   }
+      // },
     },
   },
   imports: {

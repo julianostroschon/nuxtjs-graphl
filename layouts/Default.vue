@@ -22,7 +22,7 @@ function handleToggleSidebar() {
     ]"
   >
     <HeaderLayout :isSidebarCollapsed @toggleSidebar="handleToggleSidebar" />
-    <main class="pt-2 pl-4">
+    <main class="pt-2">
       <slot />
     </main>
   </div>

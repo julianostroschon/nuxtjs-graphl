@@ -5,9 +5,13 @@ export async function seedProducts(prisma: PrismaClient) {
     data: [
       {
         name: 'beans',
+        description: 'A delicious bean.',
+        price: 1.5,
       },
       {
         name: 'rice',
+        description: 'A delicious rice.',
+        price: 2.5,
       },
     ],
   })

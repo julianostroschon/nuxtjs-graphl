@@ -1,13 +1,18 @@
 <script lang="ts">
+interface UserResponse {
+  id: number
+  username: string
+}
 export default defineComponent({
   async setup() {
-    const data = await GqlGetUsers()
-    const users = computed(() => {
+    const users = ref<UserResponse[]>([])
+    onMounted(async () => {
+      const data = await GqlGetUsers()
       const result = data?.getUsers
       if (result && result.nodes) {
-        return result.nodes
+        users.value = result.nodes
       }
-      return []
+      users.value = []
     })
     return {
       users,

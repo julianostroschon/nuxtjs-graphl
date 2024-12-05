@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { FieldProps } from './interface'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -15,6 +14,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
+import type { FieldProps } from './interface'
 
 import { DateFormatter, getLocalTimeZone } from '@internationalized/date'
 import { CalendarIcon } from '@radix-icons/vue'

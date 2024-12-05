@@ -1,6 +1,4 @@
 <script lang="ts">
-import { columns, payments } from '~/components/ui/table/SimpleTable/columns'
-
 export default defineComponent({
   name: 'UserIndex',
 

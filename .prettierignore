@@ -1,0 +1,6 @@
+.nuxt
+dist
+node_modules
+generated
+
+pnpm-lock.yaml

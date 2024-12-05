@@ -11,9 +11,9 @@ export const LogMutationTimePlugin = plugin({
       const value = await next(root, args, ctx, info)
       const endTimeMs = new Date().valueOf()
       console.log(
-        `Mutation ${info.operation.name} took ${endTimeMs - startTimeMs} ms`
+        `Mutation ${info.operation.name} took ${endTimeMs - startTimeMs} ms`,
       )
       return value
     }
-  }
+  },
 })

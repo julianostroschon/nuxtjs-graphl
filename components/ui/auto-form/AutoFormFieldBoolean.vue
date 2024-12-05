@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { FieldProps } from './interface'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   FormControl,
@@ -11,6 +10,7 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { computed } from 'vue'
 import AutoFormLabel from './AutoFormLabel.vue'
+import type { FieldProps } from './interface'
 import { beautifyObjectName } from './utils'
 
 const props = defineProps<FieldProps>()

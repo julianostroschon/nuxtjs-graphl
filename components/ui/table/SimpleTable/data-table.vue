@@ -1,10 +1,4 @@
 <script setup lang="ts" generic="TData, TValue">
-import type {
-  ColumnDef,
-  ColumnFiltersState,
-  VisibilityState,
-  ExpandedState,
-} from '@tanstack/vue-table'
 import {
   Table,
   TableBody,
@@ -13,6 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  ExpandedState,
+  VisibilityState,
+} from '@tanstack/vue-table'
 
 import {
   DropdownMenu,
@@ -26,10 +26,10 @@ import { Input } from '@/components/ui/input'
 import {
   FlexRender,
   getCoreRowModel,
-  getPaginationRowModel,
-  getFilteredRowModel,
-  useVueTable,
   getExpandedRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  useVueTable,
 } from '@tanstack/vue-table'
 
 const props = defineProps<{

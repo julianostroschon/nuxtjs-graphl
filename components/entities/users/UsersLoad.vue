@@ -30,7 +30,6 @@ export default defineComponent({
 </script>
 <template>
   <div class="card rounded bg-slate-100 shadow-md w-full">
-    {{ users }}
     <div
       id="products"
       v-for="{ id, username } in users"

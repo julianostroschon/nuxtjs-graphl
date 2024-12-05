@@ -25,9 +25,5 @@ function handleToggleSidebar() {
     <main class="pt-2">
       <slot />
     </main>
-    <FooterPage
-      class="bottom-0"
-      :class="['fh-[calc(100%-4rem)] overflow-y-auto']"
-    />
   </div>
 </template>

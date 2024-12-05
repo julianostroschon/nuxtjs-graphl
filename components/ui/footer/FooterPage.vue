@@ -1,24 +1,15 @@
-<script setup lang="ts">
-import { name, version } from '@/utils/constants'
-</script>
+<script setup lang="ts"></script>
 <template>
-  <footer class="absolute bottom-0 bg-slate-500 text-slate-100">
-    <div class="flex flex-grow justify-between items-center p-2">
-      <div class="flex flex-row gap-2">
-        <img
-          class="h-7 transition-opacity duration-300 ease-in-out"
-          :src="`/images/${name}-elemento.png`"
-          alt="Logo"
-        />
-        <span
-          class="text-sm font-bold h7 text-slate-100 pt-1 outline-4 outline-black"
-          >{{ name.toLocaleUpperCase() }}</span
-        >
-      </div>
-      <span
-        class="text-sm font-bold text-xs text-slate-400 pt-1 outline-4 outline-black"
-        >v{{ version }}</span
-      >
-    </div>
-  </footer>
+  <div class="flex flex-col justify-between items-center">
+    <img
+      v-if="name && showLogo"
+      class="h-8 w-8 transition-opacity duration-300 ease-in-out"
+      :src="`/images/${name}-elemento.png`"
+      alt="Logo"
+    />
+    <span class="text-xs font-bold h7 text-slate-700">{{
+      name.toLocaleUpperCase()
+    }}</span>
+    <span class="text-xs text-slate-400">v{{ version }}</span>
+  </div>
 </template>

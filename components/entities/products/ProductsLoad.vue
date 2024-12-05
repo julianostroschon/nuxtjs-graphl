@@ -1,8 +1,6 @@
 <script setup lang="ts">
-// const { data, error } = await useAsyncData('users', await GqlProductLoad())
 const data = await GqlProductLoad()
 const products = computed(() => data?.products)
-console.log({ data, products })
 </script>
 <template>
   <div class="card rounded bg-slate-200 shadow-md w-full" v-if="products">

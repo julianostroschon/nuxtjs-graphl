@@ -10,7 +10,6 @@ export const getProductById = async (prisma: PrismaClient, id: number) => {
       // price: true,
     },
   })
-  console.log({ product })
 
   if (!product) {
     throw new GraphQLError('Invalid product')

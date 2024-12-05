@@ -47,8 +47,8 @@ export const createAccount: FieldResolver<'Mutation', 'createAccount'> = async (
 
   const transport = await getTransport()
   transport.sendMail(generateVerificationEmail(mailOptions)).then(info => {
-    console.log(`Message id: ${info.messageId}`)
-    console.log(`URL: ${nodemailer.getTestMessageUrl(info)}`)
+    log.info(`Message id: ${info.messageId}`)
+    log.info(`URL: ${nodemailer.getTestMessageUrl(info)}`)
   })
   log.info(`Solicitação de registro para ${credentials.username} enviada`)
 

@@ -45,10 +45,10 @@ watch(
       <div class="flex-grow">
         <SidebarLinks :links :isCollapsed />
       </div>
-      <FooterPage />
+      <FooterPage :isCollapsed />
       <div
         @click="handleLogout"
-        class="flex justify-center items-center gap-3 bg-background mx-2 mt-auto px-4 py-2 border-t rounded-lg text-muted-foreground hover:text-primary transition-colors duration-300 cursor-pointer ease-in-out"
+        class="flex justify-center items-center gap-3 bg-red-50 mx-2 px-4 mb-2 py-2 border-t rounded-lg text-muted-foreground hover:text-red-500 transition-colors duration-300 cursor-pointer ease-in-out"
       >
         <Icon name="lucide:log-out"></Icon>
         <span v-if="!isCollapsed">{{ t('auth.logout') }}</span>

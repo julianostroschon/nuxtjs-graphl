@@ -15,10 +15,9 @@ export default defineComponent({
 
 <template>
   <div>
-    <h1>{{ name }}</h1>
     <div class="card rounded bg-slate-100 shadow-md w-full">
       <UsersLoad />
-      <DataTable :columns="columns" :data="payments" />
+      <!-- <DataTable :columns="columns" :data="payments" /> -->
     </div>
   </div>
 </template>

@@ -22,7 +22,7 @@ export default startServerAndCreateH3Handler(apollo, {
     const prisma = getPrismaClient(datasource)
     const token = getCookie(event, 'sid')
     if (token !== undefined) {
-      decodeToken = await verifyToken(token as string)
+      decodeToken = await verifyToken(token)
     }
     if (decodeToken !== undefined) {
       username = decodeToken.email

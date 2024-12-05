@@ -36,7 +36,7 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  plugins: ['~/plugins/graphql-headers.ts'],
+  plugins: ['~/plugins/graphql-headers.ts', '~/plugins/auth.ts'],
   css: ['~/assets/css/main.css'],
   shadcn: {
     prefix: '',
@@ -89,6 +89,13 @@ export default defineNuxtConfig({
   'graphql-client': {
     codegen: {
       avoidOptionals: true,
+      skipTypename: true,
+      silent: true,
+    },
+    functionPrefix: 'Gql',
+    tokenStorage: {
+      mode: 'localStorage',
+      name: 'graphql-client',
     },
   },
   i18n: {

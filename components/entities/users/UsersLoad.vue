@@ -1,5 +1,9 @@
 <script lang="ts">
-import { columns, payments } from '~/components/ui/table/SimpleTable/columns'
+import {
+  columns,
+  headers,
+  payments,
+} from '~/components/ui/table/SimpleTable/columns'
 import DataTable from '~/components/ui/table/SimpleTable/data-table.vue'
 
 // import { SimpleTable } from '~/components/ui/table'
@@ -21,9 +25,10 @@ export default defineComponent({
       users.value = []
     })
     return {
-      users,
-      columns,
       payments,
+      columns,
+      headers,
+      users,
     }
   },
 })
@@ -42,7 +47,21 @@ export default defineComponent({
         </div>
       </div>
     </div>
-    <DataTable :columns="columns" :data="payments" />
     {{ columns }}
+    <hr />
+    {{ headers }}
+    <DataTable :columns="columns" :data="payments">
+      <template #prepend="{ table }">
+        <Input
+          class="max-w-sm"
+          placeholder="Filter emails..."
+          :model-value="table.getColumn('email')?.getFilterValue() as string"
+          @update:model-value="table.getColumn('email')?.setFilterValue($event)"
+        />
+      </template>
+      <!-- <template #append="{ table }">
+        <OmitColumnToggle :table />
+      </template> -->
+    </DataTable>
   </div>
 </template>

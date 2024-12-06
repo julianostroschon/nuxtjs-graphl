@@ -15,15 +15,6 @@ import type {
 } from '@tanstack/vue-table'
 
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-
-import { Input } from '@/components/ui/input'
-
-import {
   FlexRender,
   getCoreRowModel,
   getExpandedRowModel,
@@ -31,10 +22,15 @@ import {
   getPaginationRowModel,
   useVueTable,
 } from '@tanstack/vue-table'
+import OmitColumToggle from '../components/OmitColumToggle.vue'
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  canOmitColumns: {
+    type: Boolean
+    default: false
+  }
 }>()
 
 const columnFilters = ref<ColumnFiltersState>([])
@@ -81,71 +77,54 @@ const table = useVueTable({
 
 <template>
   <div>
+    {{ table.getAllColumns() }}
     <div class="flex items-center py-4">
-      <Input
-        class="max-w-sm"
-        placeholder="Filter emails..."
-        :model-value="table.getColumn('email')?.getFilterValue() as string"
-        @update:model-value="table.getColumn('email')?.setFilterValue($event)"
-      />
-      <DropdownMenu>
-        <DropdownMenuTrigger as-child>
-          <Button variant="outline" class="ml-auto">
-            Columns
-            <ChevronDown class="w-4 h-4 ml-2" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuCheckboxItem
-            v-for="column in table
-              .getAllColumns()
-              .filter(column => column.getCanHide())"
-            :key="column.id"
-            class="capitalize"
-            :checked="column.getIsVisible()"
-            @update:checked="
-              value => {
-                column.toggleVisibility(!!value)
-              }
-            "
-          >
-            {{ column.id }}
-          </DropdownMenuCheckboxItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <slot name="prepend" :table />
+      <OmitColumToggle v-if="!canOmitColumns" :table />
     </div>
     <div class="border rounded-md">
       <Table>
         <TableHeader>
           <TableRow
-            v-for="headerGroup in table.getHeaderGroups()"
-            :key="headerGroup.id"
+            v-for="{ headers, id } in table.getHeaderGroups()"
+            :key="id"
           >
-            <TableHead v-for="header in headerGroup.headers" :key="header.id">
+            <TableHead
+              v-for="{ isPlaceholder, column, id, getContext } in headers"
+              :key="id"
+            >
               <FlexRender
-                v-if="!header.isPlaceholder"
-                :render="header.column.columnDef.header"
-                :props="header.getContext()"
+                v-if="!isPlaceholder"
+                :render="column.columnDef.header"
+                :props="getContext()"
               />
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           <template v-if="table.getRowModel().rows?.length">
-            <template v-for="row in table.getRowModel().rows" :key="row.id">
-              <TableRow
-                :data-state="row.getIsSelected() ? 'selected' : undefined"
-              >
-                <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
+            <template
+              v-for="{
+                getIsSelected,
+                getVisibleCells,
+                getIsExpanded,
+                getAllCells,
+                original,
+                id,
+              } in table.getRowModel().rows"
+              :key="id"
+            >
+              <TableRow :data-state="getIsSelected() ? 'selected' : undefined">
+                <TableCell v-for="cell in getVisibleCells()" :key="cell.id">
                   <FlexRender
                     :render="cell.column.columnDef.cell"
                     :props="cell.getContext()"
                   />
                 </TableCell>
               </TableRow>
-              <TableRow v-if="row.getIsExpanded()">
-                <TableCell :colspan="row.getAllCells().length">
-                  {{ JSON.stringify(row.original) }}
+              <TableRow v-if="getIsExpanded()">
+                <TableCell :colspan="getAllCells().length">
+                  {{ JSON.stringify(original) }}
                 </TableCell>
               </TableRow>
             </template>
@@ -164,7 +143,7 @@ const table = useVueTable({
         :disabled="!table.getCanPreviousPage()"
         @click="table.previousPage()"
       >
-        Previous
+        <Icon name="lucide:chevron-left" />
       </Button>
       <Button
         variant="outline"
@@ -172,7 +151,7 @@ const table = useVueTable({
         :disabled="!table.getCanNextPage()"
         @click="table.nextPage()"
       >
-        Next
+        <Icon name="lucide:chevron-right" />
       </Button>
     </div>
   </div>

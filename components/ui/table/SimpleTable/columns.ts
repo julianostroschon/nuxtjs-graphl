@@ -1,4 +1,3 @@
-import { Checkbox } from '@/components/ui/checkbox'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import DataTableDropDown from './DataTableDropDown.vue'
@@ -46,7 +45,9 @@ interface HeaderDefinition {
   class?: string
 }
 
-const buildHeaders = (headers: HeaderDefinition[]) => {
+const buildHeaders = (
+  headers: HeaderDefinition[],
+): ColumnDef<Record<string, any>>[] => {
   // console.log({ headers })
   const some = headers.map(headerRaw => {
     const {
@@ -57,51 +58,94 @@ const buildHeaders = (headers: HeaderDefinition[]) => {
       value,
       text,
     } = headerRaw
+    console.log({ value })
     return {
       header: () => h(component, { class: className }, text),
-      enableSorting,
-      enableHiding,
+      // enableSorting,
+      // enableHiding,
+      acessorKey: value,
       id: value,
     }
   })
 
-  console.log({ some })
+  console.log({ res: some.map(x => x.id) })
   return some
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columnss = [
   {
-    id: 'select',
-    header: ({ table }) =>
-      h(Checkbox, {
-        checked: table.getIsAllPageRowsSelected(),
-        'onUpdate:checked': (value: boolean) =>
-          table.toggleAllPageRowsSelected(!!value),
-        // ariaLabel: t('sidebar.about'),
-      }),
-    cell: ({ row }) =>
-      h(Checkbox, {
-        checked: row.getIsSelected(),
-        'onUpdate:checked': (value: boolean) => row.toggleSelected(!!value),
-        ariaLabel: 'Select row',
-      }),
-    enableSorting: false,
-    enableHiding: false,
+    value: 'id',
+    text: 'id',
+    enableHiding: true,
   },
   // {
-  //   accessorKey: 'id',
-  //   header: () => h('th', { class: '' }, 'LabelId'),
-  //   cell: ({ row }) => {
-  //     // console.log({ row })
-  //     // const value = row.getValue('id')
-  //     // // const formatted = new Intl.NumberFormat('en-US', {
-  //     // //   style: 'currency',
-  //     // //   currency: 'USD',
-  //     // // }).format(amount)
-
-  //     return h('div', { class: '' }, row.getValue('id'))
-  //   },
+  //   value: 'username',
+  //   text: 'Name',
+  //   enableHiding: true,
   // },
+  // {
+  //   text: 'e-mail',
+  //   value: 'email',
+  //   enableHiding: true,
+  // },
+  // {
+  //   value: 'status',
+  //   text: 'Status',
+  // },
+  // {
+  //   value: 'actions',
+  //   text: 'actions',
+  //   enableHiding: false,
+  //   // cell: ({ row }) => {
+  //   //   const payment = row.original
+
+  //   //   return h(
+  //   //     'div',
+  //   //     { class: 'relative' },
+  //   //     h(DataTableDropDown, {
+  //   //       payment,
+  //   //       onExpand: row.toggleExpanded,
+  //   //     }),
+  //   //   )
+  //   // },
+  // },
+]
+
+export const headers = buildHeaders(columnss)
+
+export const columns: ColumnDef<Payment>[] = [
+  // {
+  //   id: 'select',
+  //   header: ({ table }) =>
+  //     h(Checkbox, {
+  //       checked: table.getIsAllPageRowsSelected(),
+  //       'onUpdate:checked': (value: boolean) =>
+  //         table.toggleAllPageRowsSelected(!!value),
+  //       // ariaLabel: t('sidebar.about'),
+  //     }),
+  //   cell: ({ row }) =>
+  //     h(Checkbox, {
+  //       checked: row.getIsSelected(),
+  //       'onUpdate:checked': (value: boolean) => row.toggleSelected(!!value),
+  //       ariaLabel: 'Select row',
+  //     }),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
+  {
+    accessorKey: 'id',
+    header: () => h('th', { class: '' }, 'LabelId'),
+    cell: ({ row }) => {
+      // console.log({ row })
+      // const value = row.getValue('id')
+      // // const formatted = new Intl.NumberFormat('en-US', {
+      // //   style: 'currency',
+      // //   currency: 'USD',
+      // // }).format(amount)
+
+      return h('div', { class: '' }, row.getValue('id'))
+    },
+  },
   // {
   //   accessorKey: 'email',
   //   header: () => h('th', { class: '' }, 'email'),
@@ -129,19 +173,14 @@ export const columns: ColumnDef<Payment>[] = [
   //   },
   // },
   // {
-  //   accessorKey: 'nove',
-  //   header: () => h('div', { class: '' }, 'Nove'),
-  //   cell: ({ row }) => {
-  //     const value = row.getValue<Payment['status']>('nove')
-
-  //     return h('div', { class: '' }, value)
-  //   },
-  // },
-  // {
   //   accessorKey: 'status',
   //   header: () => h('div', { class: '' }, 'Status'),
   //   cell: ({ row }) => {
   //     const value = row.getValue<Payment['status']>('status')
+  //     // const formatted = new Intl.NumberFormat('en-US', {
+  //     //   style: 'currency',
+  //     //   currency: 'USD',
+  //     // }).format(amount)
 
   //     return h('div', { class: '' }, value)
   //   },
@@ -163,41 +202,3 @@ export const columns: ColumnDef<Payment>[] = [
   //   },
   // },
 ]
-export const columnss = [
-  {
-    value: 'select',
-    text: 'labelId',
-    enableHiding: true,
-  },
-  // {
-  //   text: 'e-mail',
-  //   value: 'email',
-  // },
-  // {
-  //   value: 'amount',
-  //   text: 'amount',
-  // },
-  // {
-  //   value: 'status',
-  //   text: 'Status',
-  // },
-  // {
-  //   value: 'actions',
-  //   text: 'actions',
-  //   enableHiding: false,
-  //   // cell: ({ row }) => {
-  //   //   const payment = row.original
-
-  //   //   return h(
-  //   //     'div',
-  //   //     { class: 'relative' },
-  //   //     h(DataTableDropDown, {
-  //   //       payment,
-  //   //       onExpand: row.toggleExpanded,
-  //   //     }),
-  //   //   )
-  //   // },
-  // },
-]
-
-export const headers = buildHeaders(columnss)

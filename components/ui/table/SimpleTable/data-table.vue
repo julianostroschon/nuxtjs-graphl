@@ -24,14 +24,20 @@ import {
 } from '@tanstack/vue-table'
 import OmitColumToggle from '../components/OmitColumToggle.vue'
 
-const props = defineProps<{
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+const props = defineProps({
+  columns: {
+    type: Array as PropType<ColumnDef<TData, TValue>[]>,
+    required: true,
+  },
+  data: {
+    type: Array as PropType<TData[]>,
+    required: true,
+  },
   canOmitColumns: {
-    type: Boolean
-    default: false
-  }
-}>()
+    type: Boolean as PropType<boolean>,
+    default: () => false,
+  },
+})
 
 const columnFilters = ref<ColumnFiltersState>([])
 const columnVisibility = ref<VisibilityState>({})
@@ -77,7 +83,6 @@ const table = useVueTable({
 
 <template>
   <div>
-    {{ table.getAllColumns() }}
     <div class="flex items-center py-4">
       <slot name="prepend" :table />
       <OmitColumToggle v-if="!canOmitColumns" :table />

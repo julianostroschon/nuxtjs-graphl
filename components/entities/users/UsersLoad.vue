@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 <template>
   <div class="card rounded bg-slate-100 shadow-md w-full">
-    <div
+    <!-- <div
       id="products"
       v-for="{ id, username } in users"
       :key="id"
@@ -46,11 +46,26 @@ export default defineComponent({
           <h2 class="card-title text-center">{{ id }} {{ username }}</h2>
         </div>
       </div>
-    </div>
-    {{ columns }}
+    </div> -->
+
+    <!-- <template #prepend="{ table }">
+        <Input
+          class="max-w-sm"
+          placeholder="Filter emails..."
+          :model-value="table.getColumn('email')?.getFilterValue() as string"
+          @update:model-value="table.getColumn('email')?.setFilterValue($event)"
+        />
+      </template> -->
+    columns:<br />
+    {{ users }}<br />
+    {{ payments }}
     <hr />
+    headers:<br />
     {{ headers }}
-    <DataTable :columns="columns" :data="payments">
+    <hr />
+    {{ columns }}
+    <DataTable :columns :data="payments" />
+    <DataTable :columns="headers" :data="users">
       <template #prepend="{ table }">
         <Input
           class="max-w-sm"
@@ -59,9 +74,6 @@ export default defineComponent({
           @update:model-value="table.getColumn('email')?.setFilterValue($event)"
         />
       </template>
-      <!-- <template #append="{ table }">
-        <OmitColumnToggle :table />
-      </template> -->
     </DataTable>
   </div>
 </template>

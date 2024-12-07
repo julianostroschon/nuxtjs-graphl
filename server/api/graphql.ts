@@ -18,7 +18,7 @@ export default startServerAndCreateH3Handler(apollo, {
     let decodeToken: JwtPayload | undefined
     let username: string | undefined = undefined
 
-    const datasource: string = getHeader(event, 'x-datasource') || 'localhost'
+    const datasource: string = getHeader(event, 'x-datasource') || ''
     const prisma = getPrismaClient(datasource)
     const token = getCookie(event, 'sid')
     if (token !== undefined) {

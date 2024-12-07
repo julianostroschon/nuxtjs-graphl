@@ -38,7 +38,7 @@ const handleRedisQuery = async (
     return
   }
   const host = window.location.host
-  const subdomain = isProduction ? host.split('.')[0] : 'localhost'
+  const subdomain = isProduction ? host.split('.')[0] : ''
   const prisma = getPrismaClient(subdomain)
 
   await prisma.user.create({

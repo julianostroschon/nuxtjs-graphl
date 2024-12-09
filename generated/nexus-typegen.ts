@@ -77,9 +77,10 @@ export interface NexusGenObjects {
   }
   ProductResponse: { // root type
     createdAt?: NexusGenScalars['Date'] | null; // Date
+    description: string; // String!
     id: number; // Int!
     name: string; // String!
-    price?: number | null; // Float
+    price: number; // Float!
     stock?: number | null; // Int
   }
   Query: {};
@@ -136,9 +137,10 @@ export interface NexusGenFieldTypes {
   }
   ProductResponse: { // field return type
     createdAt: NexusGenScalars['Date'] | null; // Date
+    description: string; // String!
     id: number; // Int!
     name: string; // String!
-    price: number | null; // Float
+    price: number; // Float!
     stock: number | null; // Int
   }
   Query: { // field return type
@@ -192,6 +194,7 @@ export interface NexusGenFieldTypeNames {
   }
   ProductResponse: { // field return type name
     createdAt: 'Date'
+    description: 'String'
     id: 'Int'
     name: 'String'
     price: 'Float'

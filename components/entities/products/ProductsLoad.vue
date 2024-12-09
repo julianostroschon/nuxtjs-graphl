@@ -1,6 +1,24 @@
-<script setup lang="ts">
-const data = await GqlProductLoad()
-const products = computed(() => data?.products)
+<script lang="ts">
+// const data = await GqlProductLoad()
+// const products = computed(() => data?.products)
+
+export default defineComponent({
+  // components: { DataTable },
+  async setup() {
+    const products = ref([])
+    onMounted(async () => {
+      const data = await GqlProductLoad()
+      const result = data?.products
+      if (result) {
+        products.value = result
+        return
+      }
+    })
+    return {
+      products,
+    }
+  },
+})
 </script>
 <template>
   <div class="card rounded bg-slate-200 shadow-md w-full" v-if="products">

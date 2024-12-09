@@ -4,20 +4,12 @@ import { PrismaClient } from '@prisma/client'
 
 export function getPrismaClient(_datasource?: string): PrismaClient {
   const databaseUrl = process.env[`DATABASE_URL`]
-  if (datasource) {
-    const prismaClients: Record<string, PrismaClient> = {}
-    const formattedDatasource = datasource.replace(/-/g, '_')
-    if (!databaseUrl) {
-      throw new Error(`Database URL for datasource ${datasource} not found.`)
-    }
-    return new PrismaClient({
-      datasources: {
-        db: {
-          url: databaseUrl,
-        },
-      },
-    })
-  // }
+  // if (datasource) {
+  //   const prismaClients: Record<string, PrismaClient> = {}
+  //   const formattedDatasource = datasource.replace(/-/g, '_')
+  //   if (!databaseUrl) {
+  //     throw new Error(`Database URL for datasource ${datasource} not found.`)
+  //   }
   return new PrismaClient({
     datasources: {
       db: {
@@ -25,6 +17,7 @@ export function getPrismaClient(_datasource?: string): PrismaClient {
       },
     },
   })
+  // }
   // }
   // return prismaClients[datasource]
 }

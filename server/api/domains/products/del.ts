@@ -12,6 +12,10 @@ export const delProduct = async (
     select: {
       name: true,
       id: true,
+      description: true,
+      price: true,
+      stock: true,
+      createdAt: true,
     },
   })
 

@@ -9,6 +9,7 @@ type Mutation {
   createAccount(credentials: credentials!): registerResponse
   login(credentials: loginCredentials!): loginResponse
   productAdd(data: ProductAddInput!): ProductResponse
+  productDel(id: ID!): ProductResponse
 }
 
 input PageArgs {
@@ -52,7 +53,7 @@ type Query {
   getUsers(pageArgs: PageArgs, userArgs: UserArgs): UserList
   implicitLogin: implicitLoginResponse
   ping: String
-  productGet(id: Int): ProductResponse
+  productGet(id: Int!): ProductResponse
   productLoad: [ProductResponse!]
 }
 

@@ -1,17 +1,15 @@
 import { extendType, inputObjectType, nonNull } from 'nexus'
 import { productAdd } from '../../resolvers/products/add'
+import { productDel } from '../../resolvers/products/del'
 import { ProductResponse } from './product'
 
 export const ProductAdd = extendType({
   type: 'Mutation',
   definition: t => {
     t.field('productAdd', {
-      type: ProductResponse,
       args: { data: nonNull(AddInput) },
+      type: ProductResponse,
       resolve: productAdd,
-      // extensions: {
-      // protectedOperation: true, // Isso será checado no plugin
-      // },
     })
   },
 })
@@ -23,5 +21,16 @@ export const AddInput = inputObjectType({
     t.nonNull.float('stock')
     t.nonNull.float('price')
     t.nonNull.string('description')
+  },
+})
+
+export const ProductDel = extendType({
+  type: 'Mutation',
+  definition: t => {
+    t.field('productDel', {
+      args: { id: nonNull('ID') },
+      type: ProductResponse,
+      resolve: productDel,
+    })
   },
 })

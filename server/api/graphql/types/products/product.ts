@@ -1,28 +1,4 @@
-import { extendType, inputObjectType, objectType } from 'nexus'
-
-import { productGet } from '../../resolvers/products/product'
-
-export const ProductGet = extendType({
-  type: 'Query',
-  definition: t => {
-    t.field('productGet', {
-      type: ProductResponse,
-      args: { id: 'Int' },
-      resolve: productGet,
-      extensions: {
-        protectedOperation: true, // Isso será checado no plugin
-      },
-    })
-  },
-})
-
-export const ProductList = objectType({
-  name: 'ProductList',
-  definition: t => {
-    t.list.nonNull.field('nodes', { type: ProductResponse })
-    // t.nonNull.field('pagination', { type: Pagination })
-  },
-})
+import { inputObjectType, objectType } from 'nexus'
 
 export const ProductArgs = inputObjectType({
   name: 'ProductArgs',

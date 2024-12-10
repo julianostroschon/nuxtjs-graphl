@@ -7,7 +7,10 @@ export const getProductById = async (prisma: PrismaClient, id: number) => {
     select: {
       id: true,
       name: true,
-      // price: true,
+      price: true,
+      description: true,
+      stock: true,
+      createdAt: true,
     },
   })
 

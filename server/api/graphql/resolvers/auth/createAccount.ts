@@ -15,8 +15,9 @@ export const createAccount: FieldResolver<'Mutation', 'createAccount'> = async (
   _,
   { credentials },
   { prisma, logger },
+  info,
 ) => {
-  const log = logger.child({ graphql: 'mutation.createAccount' })
+  const log = logger.child({ graphql: `mutation.${info.fieldName}` })
 
   await registrationValidation.validate(credentials)
   const user = await verifyExistingUser(prisma, log, credentials)

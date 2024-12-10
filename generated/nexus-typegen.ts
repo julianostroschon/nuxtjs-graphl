@@ -4,7 +4,7 @@
  */
 
 
-import type { Context } from "./../server/types/context"
+import type { GraphQLContext } from "./../server/types/context"
 import type { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -32,6 +32,12 @@ export interface NexusGenInputs {
   PageArgs: { // input type
     skip: number; // Int!
     take: number; // Int!
+  }
+  ProductAddInput: { // input type
+    description: string; // String!
+    name: string; // String!
+    price: number; // Float!
+    stock: number; // Float!
   }
   ProductArgs: { // input type
     id?: number | null; // Int
@@ -125,6 +131,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createAccount: NexusGenRootTypes['registerResponse'] | null; // registerResponse
     login: NexusGenRootTypes['loginResponse'] | null; // loginResponse
+    productAdd: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
   }
   Pagination: { // field return type
     hasMore: boolean; // Boolean!
@@ -182,6 +189,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createAccount: 'registerResponse'
     login: 'loginResponse'
+    productAdd: 'ProductResponse'
   }
   Pagination: { // field return type name
     hasMore: 'Boolean'
@@ -243,6 +251,9 @@ export interface NexusGenArgTypes {
     login: { // args
       credentials: NexusGenInputs['loginCredentials']; // loginCredentials!
     }
+    productAdd: { // args
+      data: NexusGenInputs['ProductAddInput']; // ProductAddInput!
+    }
   }
   Query: {
     getUser: { // args
@@ -289,7 +300,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: Context;
+  context: GraphQLContext;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

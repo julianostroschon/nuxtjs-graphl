@@ -23,7 +23,7 @@ model Product {
   name        String
   description String
   price       Float
-  stock       Int
+  stock       Float
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

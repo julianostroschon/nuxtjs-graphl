@@ -8,6 +8,7 @@ scalar Date
 type Mutation {
   createAccount(credentials: credentials!): registerResponse
   login(credentials: loginCredentials!): loginResponse
+  productAdd(data: ProductAddInput!): ProductResponse
 }
 
 input PageArgs {
@@ -20,6 +21,13 @@ type Pagination {
   page: Int!
   pageSize: Int!
   totalCount: Int!
+}
+
+input ProductAddInput {
+  description: String!
+  name: String!
+  price: Float!
+  stock: Float!
 }
 
 input ProductArgs {

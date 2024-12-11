@@ -38,6 +38,12 @@ yarn dev
 bun run dev
 ```
 
+Migrate the database
+
+```sh
+npx primsa db push
+```
+
 ## Production
 
 Build the application for production:

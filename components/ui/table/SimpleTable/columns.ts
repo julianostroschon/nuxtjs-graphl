@@ -1,8 +1,7 @@
 import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
-import DataTableDropDown from './DataTableDropDown.vue'
-// import type { Payment } from './data-table.vue'
 import { useI18n } from 'vue-i18n'
+import DataTableDropDown from './DataTableDropDown.vue'
 defineComponent({
   name: 'DataTableDropDown',
   setup() {
@@ -11,7 +10,6 @@ defineComponent({
     return () => h(DataTableDropDown)
   },
 })
-// const { t } = useI18n()
 export interface Payment {
   id: string
   amount: number
@@ -32,7 +30,6 @@ export const payments: Payment[] = [
     status: 'processing',
     email: 'example@gmail.com',
   },
-  // ...
 ]
 type AccepTedValue = string | number | symbol | null | undefined | boolean
 
@@ -48,7 +45,6 @@ interface HeaderDefinition {
 const buildHeaders = (
   headers: HeaderDefinition[],
 ): ColumnDef<Record<string, any>>[] => {
-  // console.log({ headers })
   const some = headers.map(headerRaw => {
     const {
       enableSorting = true,
@@ -58,17 +54,15 @@ const buildHeaders = (
       value,
       text,
     } = headerRaw
-    console.log({ value })
     return {
       header: () => h(component, { class: className }, text),
-      // enableSorting,
-      // enableHiding,
+      enableSorting,
+      enableHiding,
       acessorKey: value,
       id: value,
     }
   })
 
-  console.log({ res: some.map(x => x.id) })
   return some
 }
 
@@ -78,87 +72,28 @@ export const columnss = [
     text: 'id',
     enableHiding: true,
   },
-  // {
-  //   value: 'username',
-  //   text: 'Name',
-  //   enableHiding: true,
-  // },
-  // {
-  //   text: 'e-mail',
-  //   value: 'email',
-  //   enableHiding: true,
-  // },
-  // {
-  //   value: 'status',
-  //   text: 'Status',
-  // },
-  // {
-  //   value: 'actions',
-  //   text: 'actions',
-  //   enableHiding: false,
-  //   // cell: ({ row }) => {
-  //   //   const payment = row.original
-
-  //   //   return h(
-  //   //     'div',
-  //   //     { class: 'relative' },
-  //   //     h(DataTableDropDown, {
-  //   //       payment,
-  //   //       onExpand: row.toggleExpanded,
-  //   //     }),
-  //   //   )
-  //   // },
-  // },
 ]
 
 export const headers = buildHeaders(columnss)
 
 export const columns: ColumnDef<Payment>[] = [
-  // {
-  //   id: 'select',
-  //   header: ({ table }) =>
-  //     h(Checkbox, {
-  //       checked: table.getIsAllPageRowsSelected(),
-  //       'onUpdate:checked': (value: boolean) =>
-  //         table.toggleAllPageRowsSelected(!!value),
-  //       // ariaLabel: t('sidebar.about'),
-  //     }),
-  //   cell: ({ row }) =>
-  //     h(Checkbox, {
-  //       checked: row.getIsSelected(),
-  //       'onUpdate:checked': (value: boolean) => row.toggleSelected(!!value),
-  //       ariaLabel: 'Select row',
-  //     }),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
   {
     accessorKey: 'id',
     header: () => h('th', { class: '' }, 'LabelId'),
     cell: ({ row }) => {
-      // console.log({ row })
-      // const value = row.getValue('id')
-      // // const formatted = new Intl.NumberFormat('en-US', {
-      // //   style: 'currency',
-      // //   currency: 'USD',
-      // // }).format(amount)
-
       return h('div', { class: '' }, row.getValue('id'))
     },
   },
-  // {
-  //   accessorKey: 'email',
-  //   header: () => h('th', { class: '' }, 'email'),
-  //   cell: ({ row }) => {
-  //     const email = row.getValue('email')
-  //     // const formatted = new Intl.NumberFormat('en-US', {
-  //     //   style: 'currency',
-  //     //   currency: 'USD',
-  //     // }).format(email)
+  {
+    accessorKey: 'email',
+    id: 'id',
+    header: () => h('th', { class: '' }, 'email'),
+    cell: ({ row }) => {
+      const email = row.getValue<string>('email')
 
-  //     return h('div', { class: '' }, email)
-  //   },
-  // },
+      return h('div', { class: '' }, email)
+    },
+  },
   // {
   //   accessorKey: 'amount',
   //   header: () => h('th', { class: '' }, 'Amount'),

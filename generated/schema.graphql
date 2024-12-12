@@ -10,6 +10,7 @@ type Mutation {
   login(credentials: loginCredentials!): loginResponse
   productAdd(data: ProductAddInput!): ProductResponse
   productDel(id: ID!): ProductResponse
+  userAdd(data: UserAddInput!): UserResponse
 }
 
 input PageArgs {
@@ -55,6 +56,12 @@ type Query {
   ping: String
   productGet(id: Int!): ProductResponse
   productLoad: [ProductResponse!]
+}
+
+input UserAddInput {
+  email: String!
+  password: String!
+  username: String!
 }
 
 input UserArgs {

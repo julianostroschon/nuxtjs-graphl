@@ -25,6 +25,7 @@
     "submit": "Enviar"
   },
   "common": {
+    "submit": "Enviar",
     "required": "Campo obrigatório",
     "unknown": "Erro desconhecido",
     "config": "Configurações"
@@ -47,6 +48,13 @@
   },
   "user": {
     "email": "E-mail",
-    "config": "Configurações do Usuário"
+    "config": "Configurações do Usuário",
+    "add": "Adicionar Usuário",
+    "form": {
+      "username": "Nome de usuário",
+      "email": "E-mail",
+      "password": "Senha",
+      "confirmPassword": "Confirmar senha"
+    }
   }
 }

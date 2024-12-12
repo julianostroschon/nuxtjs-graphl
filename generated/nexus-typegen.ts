@@ -42,6 +42,11 @@ export interface NexusGenInputs {
   ProductArgs: { // input type
     id?: number | null; // Int
   }
+  UserAddInput: { // input type
+    email: string; // String!
+    password: string; // String!
+    username: string; // String!
+  }
   UserArgs: { // input type
     email?: string | null; // String
     id?: number | null; // Int
@@ -133,6 +138,7 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['loginResponse'] | null; // loginResponse
     productAdd: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
     productDel: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
+    userAdd: NexusGenRootTypes['UserResponse'] | null; // UserResponse
   }
   Pagination: { // field return type
     hasMore: boolean; // Boolean!
@@ -192,6 +198,7 @@ export interface NexusGenFieldTypeNames {
     login: 'loginResponse'
     productAdd: 'ProductResponse'
     productDel: 'ProductResponse'
+    userAdd: 'UserResponse'
   }
   Pagination: { // field return type name
     hasMore: 'Boolean'
@@ -258,6 +265,9 @@ export interface NexusGenArgTypes {
     }
     productDel: { // args
       id: string; // ID!
+    }
+    userAdd: { // args
+      data: NexusGenInputs['UserAddInput']; // UserAddInput!
     }
   }
   Query: {

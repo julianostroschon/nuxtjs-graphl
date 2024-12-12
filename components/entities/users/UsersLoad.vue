@@ -1,10 +1,11 @@
 <script lang="ts">
+import { AddUser } from '~/components/entities/users'
 import {
   columns,
   headers,
   payments,
 } from '~/components/ui/table/SimpleTable/columns'
-import DataTable from '~/components/ui/table/SimpleTable/data-table.vue'
+// import DataTable from '~/components/ui/table/SimpleTable/data-table.vue'
 
 // import { SimpleTable } from '~/components/ui/table'
 interface UserResponse {
@@ -12,7 +13,7 @@ interface UserResponse {
   username: string
 }
 export default defineComponent({
-  components: { DataTable },
+  components: { AddUser },
   async setup() {
     const users = ref<UserResponse[]>([])
     onMounted(async () => {
@@ -29,12 +30,19 @@ export default defineComponent({
       columns,
       headers,
       users,
+      dialog: ref(false),
     }
   },
 })
 </script>
 <template>
   <div class="card rounded bg-slate-100 shadow-md w-full">
+    <!-- <Icon name="lucide:plus" class="w-4 h-4 text-green-500"> -->
+    <!-- <Button @click="dialog = !dialog" class="">
+ 
+    </Button> -->
+    <AddUser />
+    <!-- </Icon> -->
     <!-- <div
       id="products"
       v-for="{ id, username } in users"
@@ -56,7 +64,7 @@ export default defineComponent({
           @update:model-value="table.getColumn('email')?.setFilterValue($event)"
         />
       </template> -->
-    columns:<br />
+    <!-- columns:<br />
     {{ users }}<br />
     {{ payments }}
     <hr />
@@ -74,6 +82,6 @@ export default defineComponent({
           @update:model-value="table.getColumn('email')?.setFilterValue($event)"
         />
       </template>
-    </DataTable>
+    </DataTable> -->
   </div>
 </template>

@@ -11,4 +11,5 @@ export const pingQuery = extendType({
 
 export * from './auth/login'
 export * from './products'
+export * from './users/mutation'
 export * from './users/user'

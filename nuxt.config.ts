@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxt/devtools',
     'nuxt-graphql-server',
     'nuxt-graphql-client', // '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',

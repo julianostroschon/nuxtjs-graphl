@@ -25,6 +25,7 @@
     "submit": "Submit"
   },
   "common": {
+    "submit": "Submit",
     "required": "Required field",
     "unknown": "Unknown error",
     "config": "Settings"
@@ -47,6 +48,13 @@
   },
   "user": {
     "email": "E-mail",
-    "config": "User Settings"
+    "config": "User Settings",
+    "add": "Add User",
+    "form": {
+      "username": "Username",
+      "email": "E-mail",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    }
   }
 }

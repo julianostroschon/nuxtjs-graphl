@@ -6,7 +6,21 @@ import {
 } from '~/components/ui/table/SimpleTable/columns'
 import DataTable from '~/components/ui/table/SimpleTable/data-table.vue'
 
-// import { SimpleTable } from '~/components/ui/table'
+const columnsName = [
+  {
+    key: 'id',
+    label: 'ID'
+  },
+  {
+    key: 'username',
+    label: 'Nome de usuário'
+  },
+  {
+    key: 'email',
+    label: 'E-mail'
+  }
+]
+
 interface UserResponse {
   id: number
   username: string
@@ -29,51 +43,13 @@ export default defineComponent({
       columns,
       headers,
       users,
+      columnsName
     }
   },
 })
 </script>
 <template>
-  <div class="card rounded bg-slate-100 shadow-md w-full">
-    <!-- <div
-      id="products"
-      v-for="{ id, username } in users"
-      :key="id"
-      class="w-full flex flex-col items-center justify-center p-4"
-    >
-      <div class="card rounded bg-slate-500 shadow-md w-full p-4">
-        <div class="card-body">
-          <h2 class="card-title text-center">{{ id }} {{ username }}</h2>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <template #prepend="{ table }">
-        <Input
-          class="max-w-sm"
-          placeholder="Filter emails..."
-          :model-value="table.getColumn('email')?.getFilterValue() as string"
-          @update:model-value="table.getColumn('email')?.setFilterValue($event)"
-        />
-      </template> -->
-    columns:<br />
-    {{ users }}<br />
-    {{ payments }}
-    <hr />
-    headers:<br />
-    {{ headers }}
-    <hr />
-    {{ columns }}
-    <DataTable :columns :data="payments" />
-    <DataTable :columns="headers" :data="users">
-      <template #prepend="{ table }">
-        <Input
-          class="max-w-sm"
-          placeholder="Filter emails..."
-          :model-value="table.getColumn('email')?.getFilterValue() as string"
-          @update:model-value="table.getColumn('email')?.setFilterValue($event)"
-        />
-      </template>
-    </DataTable>
+  <div class="card rounded bg-slate-100 shadow-md w-full">    
+    <DataTable :columns="columnsName" :rows="users"/>
   </div>
 </template>

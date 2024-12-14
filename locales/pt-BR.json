@@ -51,10 +51,12 @@
     "config": "Configurações do Usuário",
     "add": "Adicionar Usuário",
     "form": {
+      "description": "Formulário para criação de novos usuários",
       "username": "Nome de usuário",
       "email": "E-mail",
       "password": "Senha",
-      "confirmPassword": "Confirmar senha"
+      "confirmPassword": "Confirmar senha",
+      "passwordMinimum": "Mínimo de 8 caracteres"
     }
   }
 }

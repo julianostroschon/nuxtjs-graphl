@@ -10,39 +10,54 @@ import {
 } from '@/components/ui/dialog'
 import { Form, FormField } from '@/components/ui/form'
 
-import { toast } from '@/components/ui/toast'
 import { toTypedSchema } from '@vee-validate/zod'
-import { h } from 'vue'
 import * as z from 'zod'
 import ItemForm from '~/components/ui/input/ItemForm.vue'
 
 const { t } = useI18n()
-
-const formSchema = toTypedSchema(
+const fieldSchema = toTypedSchema(
+  // z.string().nonempty('Field is required').email('Must be a valid email'),
   z.object({
-    username: z.string().min(2).max(50),
-    password: z.string().min(6).max(20),
+    username: z.string().min(5).max(50),
+    password: z.string().min(8, t('user.form.passwordMinimum')),
+    // confirmPassword: z.string().min(8, t('user.form.passwordMinimum')),
   }),
 )
+// computed(() => {
+//   // console.log(fieldSchema)
+//   const { value, errorMessage } = useField('confirmPassword', fieldSchema)
+//   console.log(value, errorMessage)
+// })
 
+const { handleSubmit, errors } = useForm({
+  fieldSchema,
+})
 function onSubmit(values: Record<string, string>) {
-  toast({
-    title: 'You submitted the following values:',
-    description: h(
-      'pre',
-      { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' },
-      h('code', { class: 'text-white' }, JSON.stringify(values, null, 2)),
-    ),
-  })
+  console.log({ values, errors })
+  // toast({
+  //   title: 'You submitted the following values:',
+  //   description: h(
+  //     'pre',
+  //     { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' },
+  //     h('code', { class: 'text-white' }, JSON.stringify(values, null, 2)),
+  //   ),
+  // })
 }
+
+function confirmPassword(value: string) {
+  console.log({ values, fieldSchema })
+  return value === fieldSchema.password
+}
+
+// handleSubmit(onSubmit)
 </script>
 
 <template>
   <Form
     v-slot="{ handleSubmit }"
-    as=""
+    as="form"
     keep-values
-    :validation-schema="formSchema"
+    :validation-schema="fieldSchema"
   >
     <Dialog>
       <DialogTrigger as-child>
@@ -54,9 +69,9 @@ function onSubmit(values: Record<string, string>) {
       <DialogContent class="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>{{ t('user.add') }}</DialogTitle>
-          <!-- <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription> -->
+          <DialogDescription>
+            {{ t('user.form.description') }}
+          </DialogDescription>
         </DialogHeader>
 
         <form id="dialogForm" @submit="handleSubmit($event, onSubmit)">
@@ -65,9 +80,7 @@ function onSubmit(values: Record<string, string>) {
               :title="t('user.form.username')"
               v-bind="componentField"
               type="text"
-              placeholder="username"
-              description="This is your public display name."
-              class="w-50"
+              :placeholder="t('user.form.username')"
             />
           </FormField>
           <FormField v-slot="{ componentField }" name="password">
@@ -75,9 +88,16 @@ function onSubmit(values: Record<string, string>) {
               :title="t('user.form.password')"
               v-bind="componentField"
               type="password"
-              placeholder="password"
-              description="This is your public display name."
-              class="w-50"
+              :placeholder="t('user.form.password')"
+            />
+          </FormField>
+          <FormField v-slot="{ componentField }" name="password">
+            <ItemForm
+              :title="t('user.form.confirmPassword')"
+              v-bind="componentField"
+              type="password"
+              :placeholder="t('user.form.confirmPassword')"
+              :rules="confirmPassword"
             />
           </FormField>
         </form>

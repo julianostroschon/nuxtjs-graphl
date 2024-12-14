@@ -51,10 +51,12 @@
     "config": "User Settings",
     "add": "Add User",
     "form": {
+      "description": "Form to create new users",
       "username": "Username",
       "email": "E-mail",
       "password": "Password",
-      "confirmPassword": "Confirm password"
+      "confirmPassword": "Confirm password",
+      "passwordMinimum": "Minimum 8 characters"
     }
   }
 }

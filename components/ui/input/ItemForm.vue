@@ -26,8 +26,8 @@ export default defineComponent({
       default: '',
     },
   },
-  setup({ title, type, placeholder, description }) {
-    return { title, type, placeholder, description }
+  setup({ title, description }) {
+    return { title, description }
   },
 })
 </script>

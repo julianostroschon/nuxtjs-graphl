@@ -20,6 +20,17 @@ yarn install
 bun install
 ```
 
+## Migrate database
+```sh
+npm run migrate
+```
+
+## Seed database
+```sh
+npm run seed
+```
+
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:

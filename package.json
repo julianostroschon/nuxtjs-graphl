@@ -12,7 +12,7 @@
     "gql:gen": "node ./generate-schema.cjs",
     "lint": "eslint . --fix",
     "format": "prettier --write .",
-    "migrate": "prisma migrate",
+    "migrate": "prisma db push",
     "seed": "npx prisma db seed",
     "migrate:sh": "bash ./scripts/migrate.sh"
   },
